@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\Car;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use Illuminate\Http\Request;
 use DateTime;
 
 class ReservationController extends Controller
@@ -32,7 +33,7 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreReservationRequest $request)
+    public function store(Request $request)
     {
         //
         $this->validate($request, [
@@ -94,5 +95,10 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         //
+    }
+    public function messi(Request $request)
+    {
+        # code...
+        return 0;
     }
 }

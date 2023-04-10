@@ -26,9 +26,15 @@
                @auth
                     <li class="nav-item">
                       @if (Auth::user()->is_admin == 1)
-                          <a class="nav-link" href="{{route('dashboard')}}">
+                        <div class="d-flex">
+                          <a class="nav-link border-bottom border-primary" href="{{route('dashboard')}}">
                             {{auth()->user()->name}}
                           </a>
+                          <a class="nav-link" href="{{route('dashboard')}}">
+                            Dashboard
+                          </a>
+                        </div>
+                          
                       @else
                           <a class="nav-link" href="{{route('users.profile',auth()->user()->id)}}">
                             {{auth()->user()->name}}

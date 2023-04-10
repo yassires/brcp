@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use stdClass;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -58,7 +58,7 @@ class UsersController extends Controller
             $cars[] = $obj;
 
         }
-        return view('auth.show', compact('cars'));
+        return view('users.show', compact('cars'));
     }
 
     /**
@@ -83,6 +83,11 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function registr()
+    {
+        return view('users.register');
     }
 
     public function register(Request $request)

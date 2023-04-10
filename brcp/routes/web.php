@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
 use GuzzleHttp\Promise\Create;
 
 /*
@@ -22,12 +22,13 @@ Route::Resource('/cars', CarController::class);
 Route::post('/cars', [CarController::class,'index'])->name('cars.index');
 Route::Resource('/reservation', ReservationController::class);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
-Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.profile');
+Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.profile');
 
-Route::get('/login',[UsersController::class,'login'])->name('users.login');
-Route::get('/auth',[UsersController::class,'auth'])->name('users.auth');
-Route::get('/logout',[UsersController::class,'logout'])->name('users.logout');
-Route::get('/register',[UsersController::class,'register'])->name('users.register');
+Route::get('/login',[UserController::class,'login'])->name('users.login');
+Route::post('/auth',[UserController::class,'auth'])->name('users.auth');
+Route::post('/logout',[UserController::class,'logout'])->name('users.logout');
+Route::get('/register',[UserController::class,'registr'])->name('users.register');
+Route::post('/register',[UserController::class,'register'])->name('users.register');
 
 
 Route::middleware([
