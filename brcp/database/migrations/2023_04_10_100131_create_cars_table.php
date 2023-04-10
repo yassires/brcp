@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('price_sell');
             $table->decimal('price_rent');
             $table->string('image')->default("img\mercedes-classe-c.jpeg");
-            $table->boolean('available')->default(0);
+            $table->boolean('available')->default(1);
             $table->timestamps();
         });
     }
