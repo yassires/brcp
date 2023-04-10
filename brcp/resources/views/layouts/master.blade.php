@@ -37,17 +37,17 @@
                       
                     </li>
                     <li class="nav-item">
-                      <form action="{{route('logout')}}" method="POST">
+                      <form action="{{route('users.logout')}}" method="POST">
                         @csrf
                         <button  class="nav-link" >Logout</button>
                       </form>
                     </li>
                   @else
                     <li class="nav-item">
-                      <a class="nav-link" href="{{route('register')}}">Register</a>
+                      <a class="nav-link" href="{{route('users.register')}}">Register</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{{route('login')}}">Login</a>
+                      <a class="nav-link" href="{{route('users.login')}}">Login</a>
                     </li>
                @endauth
               </ul>

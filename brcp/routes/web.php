@@ -24,7 +24,10 @@ Route::Resource('/reservation', ReservationController::class);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
 Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.profile');
 
-
+Route::get('/login',[UsersController::class,'login'])->name('users.login');
+Route::get('/auth',[UsersController::class,'auth'])->name('users.auth');
+Route::get('/logout',[UsersController::class,'logout'])->name('users.logout');
+Route::get('/register',[UsersController::class,'register'])->name('users.register');
 
 
 Route::middleware([

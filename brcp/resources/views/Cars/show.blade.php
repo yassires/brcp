@@ -50,7 +50,7 @@
                                         </div>
                                     @else
                                         <div>
-                                            <a href="{{route('login')}}" class="btn btn-primary">
+                                            <a href="{{route('users.login')}}" class="btn btn-primary">
                                                 To Book
                                             </a>
                                         </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Car;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use stdClass;
 
 class UsersController extends Controller
@@ -84,10 +85,29 @@ class UsersController extends Controller
         //
     }
 
+    public function register(Request $request)
+    {
+       $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+            'name' => 'required',
+       ]);
+       User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+       ]);
+       return redirect()->route('users.login')->with([
+        'success' => 'Account created successfully'
+        ]);
+    }
+
+
     public function login()
     {
         return view('users.login');
     }
+
     public function auth(Request $request)
     {
         $this->validate($request,[
