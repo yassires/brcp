@@ -16,9 +16,9 @@
                                 <label for="">Brand</label>
                                 <select class="form-control" name="brand" id="">
                                     <option value="" selected disabled>Can you select the Brand</option>
-                                    <option value="1" {{$car->brand->name == 'Tesla' ? 'selected' : ''}}>Tesla</option>
-                                    <option value="2" {{$car->brand->name == 'Porsche' ? 'selected' : ''}}>Porsche</option>
-                                    <option value="3" {{$car->brand->name == 'Mercedes' ? 'selected' : ''}}>Mercedes</option>
+                                    <option value="1" {{$car->Brand->name == 'Tesla' ? 'selected' : ''}}>Tesla</option>
+                                    <option value="2" {{$car->Brand->name == 'Porsche' ? 'selected' : ''}}>Porsche</option>
+                                    <option value="3" {{$car->Brand->name == 'Mercedes' ? 'selected' : ''}}>Mercedes</option>
                                 </select> 
                             </div>
                             <div class="form-group">
@@ -32,10 +32,10 @@
                                 <label for="">Category</label>
                                 <select class="form-control" name="category" id="">
                                     <option value="" selected disabled>Can you select the Category</option>
-                                    <option value="1" {{$car->category->name == 'Diesle' ? 'selected' : ''}}>Diesle</option>
-                                    <option value="2" {{$car->category->name == 'Gasoline' ? 'selected' : ''}}>Gasoline</option>
-                                    <option value="3" {{$car->category->name == 'Electric' ? 'selected' : ''}}>Electric</option>
-                                    <option value="4" {{$car->category->name == 'Hybrid' ? 'selected' : ''}}>Hybrid</option>
+                                    <option value="1" {{$car->Category->name == 'Diesle' ? 'selected' : ''}}>Diesle</option>
+                                    <option value="2" {{$car->Category->name == 'Gasoline' ? 'selected' : ''}}>Gasoline</option>
+                                    <option value="3" {{$car->Category->name == 'Electric' ? 'selected' : ''}}>Electric</option>
+                                    <option value="4" {{$car->Category->name == 'Hybrid' ? 'selected' : ''}}>Hybrid</option>
                                 </select>   
                             </div>
                             <div class="form-group">
@@ -75,8 +75,7 @@
                                 >
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                               </div>
                         </form>
                     </div>

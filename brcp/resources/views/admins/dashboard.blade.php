@@ -77,6 +77,15 @@
                 </button>
             </div>
             <div class="card">
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 <div class="card-body">
                     <table class="table">
                         <thead>
@@ -180,13 +189,13 @@
                 </div>
                 <div class="form-group">
                     <label for="">Price for rent</label>
-                    <input type="number" name="price_r"
+                    <input type="number" name="price_rent"
                     id="" class="form-control"
                     placeholder="500$">
                 </div>
                 <div class="form-group">
                     <label for="">Price for sell</label>
-                    <input type="number" name="price_s"
+                    <input type="number" name="price_sell"
                     id="" class="form-control"
                     placeholder="500$">
                 </div>

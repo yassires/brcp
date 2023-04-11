@@ -46,8 +46,8 @@ class ReservationController extends Controller
         $dateLocation = new DateTime($request->rent_date_start);
         $dateRetour = new DateTime($request->rent_date_end);
         $jours = date_diff($dateLocation, $dateRetour);
-        $prixTtc =$car->price_rent * $jours->format('%d');
-        
+        $prixTtc = $car->price_rent * $jours->format('%d');
+
         Reservation::create([
             'user_id' => auth()->user()->id,
             'car_id' => $request->car_id,
@@ -95,6 +95,10 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         //
+        $reservation->delete();
+        return redirect()->route('users.profile', auth()->user()->id)->with([
+            'success' => 'Reservation Deleted successfully'
+        ]);
     }
     // public function messi(Request $request)
     // {
@@ -102,13 +106,13 @@ class ReservationController extends Controller
     //     return 0;
     // }
 
-    public function deleteUserResrvation($reservationId,$carId)
+    public function deleteUserResrvation($reservationId)
     {
         $car = Car::all();
         $reservation = Reservation::findOrFail($reservationId);
-        if($reservation->car_id == $carId){
+        if ($reservation->car_id == $car->id) {
             $reservation->delete();
-            return redirect()->route('users.profile',auth()->user()->id)->with([
+            return redirect()->route('users.profile', auth()->user()->id)->with([
                 'success' => 'Reservation Deleted successfully'
             ]);
         }

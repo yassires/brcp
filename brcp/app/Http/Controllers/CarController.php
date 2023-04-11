@@ -74,6 +74,7 @@ class CarController extends Controller
             'brand' => $request->brand,
             'name' => $request->name,
             'category' => $request->category,
+            'color' => $request->color,
             'price_rent' => $request->price_rent,
             'price_sell' => $request->price_sell,
             'available' => $request->available,

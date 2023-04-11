@@ -26,7 +26,7 @@ Route::post('/add/cars', [CarController::class,'store'])->name('cars.store');
 
 Route::Resource('/reservation', ReservationController::class);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
-Route::delete('/reservation/{resrvationId}/{carId}/delete', [ReservationController::class, 'deleteUserResrvation'])->name('reservation.delete');
+// Route::delete('/reservation/{resrvationId}/delete', [ReservationController::class, 'deleteUserResrvation'])->name('reservation.delete');
 
 Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.profile');
 
