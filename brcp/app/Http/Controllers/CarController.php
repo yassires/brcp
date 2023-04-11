@@ -15,7 +15,7 @@ class CarController extends Controller
      */
     public function index(Request $request)
     {
-        $cars = Car::with('Brand','Category')->paginate(5);
+        $cars = Car::with('Brand', 'Category')->paginate(5);
         $a_cars = Car::whereAvailable(1)->get();
 
         // if ($request->search !== null) {
@@ -28,16 +28,16 @@ class CarController extends Controller
         //         'title' =>"Result found for : ".$request->search
         //     ]);
         // } else {
-             return view('cars.index')->with([
+        return view('cars.index')->with([
             'cars' => $cars,
-            'title' =>"All Cars"
+            'title' => "All Cars"
         ]);
         // }
-        
-       
-        
 
-    
+
+
+
+
     }
 
     /**
@@ -51,9 +51,35 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCarRequest $request)
+    public function store(Request $request)
     {
         //
+        // dd($request->all());
+        $this->validate($request, [
+            'brand' => 'required',
+            'name' => 'required',
+            'category' => 'required',
+            'price_rent' => 'required',
+            'price_sell' => 'required',
+            'available' => 'required',
+            'image' => 'required',
+        ]);
+
+        $name = '';
+        $file = $request->image;
+        $name = $file->getClientOriginalName();
+        $file->move(public_path('images'), $name);
+
+        Car::create([
+            'brand' => $request->brand,
+            'name' => $request->name,
+            'category' => $request->category,
+            'price_rent' => $request->price_rent,
+            'price_sell' => $request->price_sell,
+            'available' => $request->available,
+            'image' => '/images/' . $name,
+        ]);
+        return redirect()->route('admins.index')->withSuccess('Car added successfully');
     }
 
     /**
@@ -67,9 +93,11 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Car $car)
+    public function edit(Car $car, $id)
     {
         //
+        $car = Car::with('brand', 'category')->findOrFail($id);
+        return view('cars.edit', compact('car'));
     }
 
     /**
