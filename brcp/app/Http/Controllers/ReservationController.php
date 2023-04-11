@@ -96,9 +96,21 @@ class ReservationController extends Controller
     {
         //
     }
-    public function messi(Request $request)
+    // public function messi(Request $request)
+    // {
+    //     # code...
+    //     return 0;
+    // }
+
+    public function deleteUserResrvation($reservationId,$carId)
     {
-        # code...
-        return 0;
+        $car = Car::all();
+        $reservation = Reservation::findOrFail($reservationId);
+        if($reservation->car_id == $carId){
+            $reservation->delete();
+            return redirect()->route('users.profile',auth()->user()->id)->with([
+                'success' => 'Reservation Deleted successfully'
+            ]);
+        }
     }
 }

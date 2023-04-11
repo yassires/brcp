@@ -37,7 +37,12 @@
                                 <td>{{$reservation->pick_up_date}}</td>
                                 <td>{{$reservation->drop_of_date}}</td>
                                 <td>{{$reservation->price}}</td>
-                                <td></td> 
+                                <td>
+                                    <form action="{{route('reservation.delete',[$reservation->id,$reservation->car_id])}}" >
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td> 
                             </tr>
                             
                         @endforeach

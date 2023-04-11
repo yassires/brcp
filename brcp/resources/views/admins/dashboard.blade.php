@@ -119,9 +119,13 @@
                                     class="img-fluid rounded"
                                     alt="">
                                 </td>
-                                <td>
-                                    <a href="{{route('cars.edit',$car->id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                <td class="d-flex flex-row justify-content-center">
+                                    <a href="{{route('cars.edit',$car->id)}}" class="btn btn-warning mr-2"><i class="fa fa-edit"></i></a>
+                                    <form action="{{route('cars.destroy',$car->id)}}" method="POST">
+                                        @csrf
+                                        {{method_field('delete')}}
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
