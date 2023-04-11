@@ -64,7 +64,7 @@ class CarController extends Controller
             'available' => 'required',
             'image' => 'required',
         ]);
-
+        // dd($request->all());
         $name = '';
         $file = $request->image;
         $name = $file->getClientOriginalName();
@@ -120,7 +120,7 @@ class CarController extends Controller
             $file = $request->image;
             $name = $file->getClientOriginalName();
             $file->move(public_path('images'), $name);
-            $image = '/images/'.$name;
+            $image = 'images/'.$name;
         }
         
         $car->update([

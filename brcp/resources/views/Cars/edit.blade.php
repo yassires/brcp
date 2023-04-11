@@ -68,13 +68,13 @@
                                 </select>   
                             </div>
                             <div class="form-group">
-                                <img src="{{$car->image}}" width="100" height="100" alt="" class="img-fluid rounded">
+                                <img src="/{{$car->image}}" width="100" height="100" alt="" class="img-fluid rounded">
                                 <label for="">Image</label>
                                 <input type="file" name="image"
                                 id="" class="form-control"
                                 >
                             </div>
-                            <div class="modal-footer">
+                            <div class="modal-footer my-2">
                                 <button type="submit" class="btn btn-primary">Update</button>
                               </div>
                         </form>

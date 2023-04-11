@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/perfect-scrollbar.css')}}">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"> --}}
 @section('content')
 <div class="row column1">
     <div class="col-md-6 col-lg-3">
@@ -69,6 +71,8 @@
        </div>
     </div>
  </div>
+
+     {{---------Cars table---------}}
     <div class="row my-4">
         <div class="col-md-12">
             <div class="form-group">
@@ -78,16 +82,16 @@
             </div>
             <div class="card">
                 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table" id="example2">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -144,6 +148,142 @@
             </div>
         </div>
     </div>
+
+
+    {{---------Brands table---------}}
+    <div class="row my-4">
+        <div class="col-md-12">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addBrand">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+            <div class="card">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="card-body">
+                    <table class="table" id="example1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>image</th> 
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($brand as $brand)
+                            <tr>
+                                <td>{{$brand->id}}</td>
+                                <td>{{$brand->name}}</td>
+                                <td>
+                                    <img src="{{$brand->image}}"
+                                    width="60px"
+                                    height="60px"
+                                    class="img-fluid rounded"
+                                    alt="">
+                                </td>
+                                <td class="d-flex flex-row justify-content-center">
+                                    {{-- @php
+                                        dd($brand->id);
+                                    @endphp --}}
+                                    <a href="{{route('Brands.edit',$brand->id)}}" class="btn btn-warning mr-2"><i class="fa fa-edit"></i></a>
+                                    <form action="{{route('Brands.destroy',$brand->id)}}" method="POST">
+                                        @csrf
+                                        {{method_field('delete')}}
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{---------Products table---------}}
+    <div class="row my-4">
+        <div class="col-md-12">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addProduct">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+            <div class="card">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="card-body">
+                    <table class="table" id="example3">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Price</th> 
+                                <th>Description</th> 
+                                <th>Quantity</th> 
+                                <th>image</th> 
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($product as $product)
+                            <tr>
+                                <td>{{$product->id}}</td>
+                                <td>{{$product->name}}</td>
+                                <td>{{$product->price}}</td>
+                                <td>{{$product->description}}</td>
+                                <td>{{$product->quantity}}</td>
+                                <td>
+                                    <img src="{{$product->image}}"
+                                    width="60px"
+                                    height="60px"
+                                    class="img-fluid rounded"
+                                    alt="">
+                                </td>
+                                <td class="d-flex flex-row justify-content-center">
+                                    {{-- @php
+                                        dd($brand->id);
+                                    @endphp --}}
+                                    <a href="{{route('products.edit',$product->id)}}" class="btn btn-warning mr-2"><i class="fa fa-edit"></i></a>
+                                    <form action="{{route('products.destroy',$product->id)}}" method="POST">
+                                        @csrf
+                                        {{method_field('delete')}}
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
 
     <!-- Modal -->
 <div class="modal fade me-auto" id="addCar" tabindex="-1" aria-labelledby="addCar" aria-hidden="true">
@@ -222,7 +362,106 @@
         
       </div>
     </div>
-  </div>
+</div>
+
+
+    <!--Brand Modal -->
+<div class="modal fade me-auto" id="addBrand" tabindex="-1" aria-labelledby="addbrand" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addBrand">Add Car</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{{route('Brands.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="">name</label>
+                    <input type="text" name="name"
+                    id="" class="form-control"
+                    placeholder="name">
+                </div>
+                <div class="form-group">
+                    <label for="">Image</label>
+                    <input type="file" name="image"
+                    id="" class="form-control"
+                    >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+            </form>
+        </div>
+        
+      </div>
+    </div>
+</div>
+
+
+    <!-- Products Modal -->
+    <div class="modal fade me-auto" id="addProduct" tabindex="-1" aria-labelledby="addProduct" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="addProduct">Add Product</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" name="name"
+                        id="" class="form-control"
+                        placeholder="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Price</label>
+                        <input type="number" name="price"
+                        id="" class="form-control"
+                        placeholder="500$" step="any">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <input type="text" name="description"
+                        id="" class="form-control"
+                        placeholder="Description.....">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Quantity</label>
+                        <input type="number" name="quantity"
+                        id="" class="form-control"
+                        placeholder="12..">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Image</label>
+                        <input type="file" name="image"
+                        id="" class="form-control"
+                        >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                      </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+    </div>
     
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#example1').DataTable();
+    $('#example2').DataTable();
+    $('#example3').DataTable();
+    });
+</script>
 
 @endsection

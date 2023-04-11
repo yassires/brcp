@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
-use App\Http\Requests\StoreBrandRequest;
-use App\Http\Requests\UpdateBrandRequest;
+use App\Models\Products;
+use App\Http\Requests\StoreProductsRequest;
+use App\Http\Requests\UpdateProductsRequest;
 
-class BrandController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,13 @@ class BrandController extends Controller
     public function index()
     {
         //
-        $brands = Brand::all();
-        $a_brands = Brand::whereAvailable(1)->get();
+        $products = Products::all();
+        $a_brands = Products::whereAvailable(1)->get();
 
 
         return view('cars.index')->with([
-            'cars' => $brands,
-            'title' => "All Brands"
+            'products' => $products,
+            'title' => "All Products"
         ]);
     }
 
@@ -39,14 +39,17 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBrandRequest  $request
+     * @param  \App\Http\Requests\StoreProductsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBrandRequest $request)
+    public function store(StoreProductsRequest $request)
     {
         //
         $this->validate($request, [
             'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'quantity' => 'required',
             'image' => 'required',
         ]);
 
@@ -55,20 +58,23 @@ class BrandController extends Controller
         $name = $file->getClientOriginalName();
         $file->move(public_path('images'), $name);
 
-        Brand::create([
+        Products::create([
             'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
             'image' => 'images/' . $name,
         ]);
-        return redirect()->route('admins.index')->withSuccess('Brand added successfully');
+        return redirect()->route('admins.index')->withSuccess('Product added successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show(Products $products)
     {
         //
     }
@@ -76,31 +82,34 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $brand = Brand::find($id);
-        $brands = Brand::all();
-        return view('brands.edit', compact('brand'));
+        //
+        $product = Products::find($id);
+        $products = Products::all();
+        return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBrandRequest  $request
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Http\Requests\UpdateProductsRequest  $request
+     * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(UpdateProductsRequest $request, Products $products)
     {
         //
-        // dd($request,$brand);
         $this->validate($request, [
             'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'quantity' => 'required',
         ]);
-        $image = $brand->image;
+        $image = $products->image;
         if ($request->hasFile('image')) {
             $file = $request->image;
             $name = $file->getClientOriginalName();
@@ -108,26 +117,28 @@ class BrandController extends Controller
             $image = 'images/' . $name;
         }
 
-        $brand->update([
+        $products->update([
             'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
             'image' => $image
         ]);
-        return redirect()->route('admins.index')->withSuccess('Brand updated  successfully');
+        return redirect()->route('admins.index')->withSuccess('product updated  successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-        $brand = Brand::find($id);
+        $products = Products::find($id);
         // return $id;
-        // dd($brand);
-        $brand->delete();
-        return redirect()->route('admins.index')->withSuccess('Brand deleted  successfully');
+        $products->delete();
+        return redirect()->route('admins.index')->withSuccess('Product deleted  successfully');
     }
 }
