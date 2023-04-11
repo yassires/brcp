@@ -11,13 +11,14 @@
                     <div class="card-body">
                         <form action="{{route('cars.update',$car->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            {{method_field('put')}}
                             <div class="form-group">
                                 <label for="">Brand</label>
                                 <select class="form-control" name="brand" id="">
                                     <option value="" selected disabled>Can you select the Brand</option>
-                                    <option value="1" {{$car->brand == 'Tesla' ? 'selected' : ''}}>Tesla</option>
-                                    <option value="2" {{$car->brand == 'Porsche' ? 'selected' : ''}}>Porsche</option>
-                                    <option value="3" {{$car->brand == 'Mercedes' ? 'selected' : ''}}>Mercedes</option>
+                                    <option value="1" {{$car->brand->name == 'Tesla' ? 'selected' : ''}}>Tesla</option>
+                                    <option value="2" {{$car->brand->name == 'Porsche' ? 'selected' : ''}}>Porsche</option>
+                                    <option value="3" {{$car->brand->name == 'Mercedes' ? 'selected' : ''}}>Mercedes</option>
                                 </select> 
                             </div>
                             <div class="form-group">

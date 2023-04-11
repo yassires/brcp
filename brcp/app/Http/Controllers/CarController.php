@@ -93,10 +93,10 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Car $car, $id)
+    public function edit(Car $car)
     {
         //
-        $car = Car::with('brand', 'category')->findOrFail($id);
+        $cars = Car::with('brand', 'category')->findOrFail($car->id);
         return view('cars.edit', compact('car'));
     }
 
@@ -106,6 +106,32 @@ class CarController extends Controller
     public function update(UpdateCarRequest $request, Car $car)
     {
         //
+        $this->validate($request, [
+            'brand' => 'required',
+            'name' => 'required',
+            'category' => 'required',
+            'price_rent' => 'required',
+            'price_sell' => 'required',
+            'available' => 'required',
+        ]);
+        $image = $car->image;
+        if($request->hasFile('image')){
+            $file = $request->image;
+            $name = $file->getClientOriginalName();
+            $file->move(public_path('images'), $name);
+            $image = '/images/'.$name;
+        }
+        
+        $car->update([
+             'brand' => $request->brand,
+            'name' => $request->name,
+            'category' => $request->category,
+            'price_rent' => $request->price_rent,
+            'price_sell' => $request->price_sell,
+            'available' => $request->available,
+            'image' => $image
+        ]);
+        return redirect()->route('admins.index')->withSuccess('Car updated  successfully');
     }
 
     /**
