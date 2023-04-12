@@ -9,9 +9,15 @@
                         Edit a Car
                     </h3>
                     <div class="card-body">
+                                @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger" role="alert">
+                            {{ $error }}
+                        </div>
+                    @endforeach
                         <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            {{method_field('put')}}
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{$product->id}}">
                             <div class="form-group">
                                 <label for="">Name</label>
                                 <input type="text" name="name"

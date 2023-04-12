@@ -33,9 +33,11 @@ Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])
 
 
 Route::Resource('/Brands', BrandController::class);
+Route::put('/Brands', [BrandController::class, 'update'])->name('brands.update');
 Route::post('/add/brands', [BrandController::class, 'store'])->name('brands.store');
 
 Route::Resource('/products', ProductsController::class);
+Route::put('/products/{id}', [ProductsController::class, 'update'])->name('Products.update');
 Route::post('/add/products', [ProductsController::class, 'store'])->name('products.store');
 
 

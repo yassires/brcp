@@ -103,12 +103,14 @@ class ProductsController extends Controller
     public function update(UpdateProductsRequest $request, Products $products)
     {
         //
+        // dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
             'quantity' => 'required',
         ]);
+        $products = Products::find($request->id);
         $image = $products->image;
         if ($request->hasFile('image')) {
             $file = $request->image;
@@ -116,14 +118,15 @@ class ProductsController extends Controller
             $file->move(public_path('images'), $name);
             $image = 'images/' . $name;
         }
+        // dd($products, $request->all());
 
-        $products->update([
+        ($products->update([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
             'quantity' => $request->quantity,
             'image' => $image
-        ]);
+        ]));
         return redirect()->route('admins.index')->withSuccess('product updated  successfully');
     }
 
