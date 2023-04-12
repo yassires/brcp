@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@auth
+    
+
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     <link rel="stylesheet" href="{{asset('css/colors.css')}}">
@@ -463,5 +466,5 @@
     $('#example3').DataTable();
     });
 </script>
-
+@endauth
 @endsection

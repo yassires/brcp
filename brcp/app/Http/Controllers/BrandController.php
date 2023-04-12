@@ -100,6 +100,7 @@ class BrandController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
+        $brand = Brand::find($request->id);
         $image = $brand->image;
         if ($request->hasFile('image')) {
             $file = $request->image;
