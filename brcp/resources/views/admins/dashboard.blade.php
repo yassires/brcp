@@ -1,6 +1,4 @@
-@extends('layouts.master')
-@auth
-    
+<x-dash>
 
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
@@ -11,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/perfect-scrollbar.css')}}">
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"> --}}
-@section('content')
+
 <div class="row column1">
     <div class="col-md-6 col-lg-3">
        <div class="full counter_section margin_bottom_30">
@@ -466,5 +464,5 @@
     $('#example3').DataTable();
     });
 </script>
-@endauth
-@endsection
+
+</x-dash>

@@ -39,8 +39,12 @@ class ReservationController extends Controller
         $this->validate($request, [
             // 'user_id' => 'required',
             'car_id' => 'required',
-            'rent_date_start' => 'required',
+            'rent_date_start' => 'required|date|after_or_equal:today',
             'rent_date_end' => 'required',
+        ],
+        [
+            'start_time.after_or_equal' => 'The Reservation date must today or after tomorrow.',
+       
         ]);
         $car = Car::find($request->car_id);
         $dateLocation = new DateTime($request->rent_date_start);

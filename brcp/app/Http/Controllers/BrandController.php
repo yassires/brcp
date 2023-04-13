@@ -101,6 +101,7 @@ class BrandController extends Controller
             'name' => 'required',
         ]);
         $brand = Brand::find($request->id);
+
         $image = $brand->image;
         if ($request->hasFile('image')) {
             $file = $request->image;

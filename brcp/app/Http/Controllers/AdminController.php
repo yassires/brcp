@@ -18,4 +18,7 @@ class AdminController extends Controller
         $product = Products::all();
         return view('admins.dashboard', compact('car','brand','product'));
     }
+    public function show(){
+        return view('admins.dashboard_a');
+    }
 }

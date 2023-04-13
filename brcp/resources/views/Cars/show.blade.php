@@ -55,7 +55,6 @@
                                             </a>
                                         </div>
                                     @endauth
-                                        
                                 @else
                                     <span class="badge bg-warning ">
                                         Reserved

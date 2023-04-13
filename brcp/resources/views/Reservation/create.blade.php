@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="row my-4">
+                @if ($errors->any())
+                    <div class="alert alert-danger decoration-none">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
         <div class="col-md-8 mx-auto">
             <div class="card border shadow-sm">
                 <h3 class="card-header">Book Up</h3>

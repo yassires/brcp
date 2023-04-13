@@ -12,6 +12,7 @@
                         <form action="{{route('Brands.update',$brand->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             {{method_field('put')}}
+                            <input type="hidden" name="id" value="{{$brand->id}}">
                             <div class="form-group">
                                 <label for="">name</label>
                                 <input type="text" name="name"

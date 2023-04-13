@@ -43,21 +43,19 @@ Route::post('/add/products', [ProductsController::class, 'store'])->name('produc
 
 Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.profile');
 
+Route::get('/admin/dashboard',[AdminController::class,'show'])->name('admins.dashboars_a');
 
 Route::get('/login', [UserController::class, 'login'])->name('users.login');
 Route::post('/auth', [UserController::class, 'auth'])->name('users.auth');
 Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
 Route::get('/register', [UserController::class, 'registr'])->name('users.register');
 Route::post('/register', [UserController::class, 'register'])->name('users.register');
-Route::get('/admin', [AdminController::class, 'index'])->name('admins.index');
 
 
 Route::middleware([
     'admin',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admins.index');
 });
 
 // Route::group(['middleware' => 'admin'], function () {
