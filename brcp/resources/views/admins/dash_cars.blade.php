@@ -57,7 +57,7 @@
                                 width="60"
                                 height="60"
                                 class="img-fluid rounded"
-                                alt="">
+                                alt=" car image">
                             </td>
                             <td class="d-flex flex-row justify-content-center">
                                 <div class="pe-3">
