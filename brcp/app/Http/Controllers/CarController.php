@@ -80,7 +80,7 @@ class CarController extends Controller
             'available' => $request->available,
             'image' => '/images/' . $name,
         ]);
-        return redirect()->route('admins.index')->withSuccess('Car added successfully');
+        return redirect()->route('admins.cars')->withSuccess('Car added successfully');
     }
 
     /**
@@ -132,7 +132,7 @@ class CarController extends Controller
             'available' => $request->available,
             'image' => $image
         ]);
-        return redirect()->route('admins.index')->withSuccess('Car updated  successfully');
+        return redirect()->route('admins.cars')->withSuccess('Car updated  successfully');
     }
 
     /**
@@ -142,7 +142,7 @@ class CarController extends Controller
     {
         //
         $car->delete();
-        return redirect()->route('admins.index')->withSuccess('Car deleted  successfully');
+        return redirect()->route('admins.cars')->withSuccess('Car deleted  successfully');
 
     }
 }

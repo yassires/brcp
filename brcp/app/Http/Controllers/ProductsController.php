@@ -65,7 +65,7 @@ class ProductsController extends Controller
             'quantity' => $request->quantity,
             'image' => 'images/' . $name,
         ]);
-        return redirect()->route('admins.index')->withSuccess('Product added successfully');
+        return redirect()->route('admins.products')->withSuccess('Product added successfully');
     }
 
     /**
@@ -127,7 +127,7 @@ class ProductsController extends Controller
             'quantity' => $request->quantity,
             'image' => $image
         ]));
-        return redirect()->route('admins.index')->withSuccess('product updated  successfully');
+        return redirect()->route('admins.products')->withSuccess('product updated  successfully');
     }
 
     /**
@@ -142,6 +142,6 @@ class ProductsController extends Controller
         $products = Products::find($id);
         // return $id;
         $products->delete();
-        return redirect()->route('admins.index')->withSuccess('Product deleted  successfully');
+        return redirect()->route('admins.products')->withSuccess('Product deleted  successfully');
     }
 }

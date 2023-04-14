@@ -23,7 +23,7 @@ use GuzzleHttp\Promise\Create;
 
 Route::get('/', [CarController::class, 'index']);
 Route::Resource('/cars', CarController::class);
-Route::post('/cars', [CarController::class, 'index'])->name('cars.index');
+// Route::post('/cars', [CarController::class, 'index'])->name('cars.index');
 
 Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 
@@ -56,6 +56,9 @@ Route::middleware([
     'admin',
 ])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admins.index');
+    Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.cars');
+    Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products');
+    Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands');
 });
 
 // Route::group(['middleware' => 'admin'], function () {
