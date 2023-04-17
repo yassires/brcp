@@ -45,8 +45,8 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $reservations = Reservation::where('user_id', $id)->get();
         $cars = [];
-        foreach($reservations as $reservation){
-            $car = Car::where('id',$reservation->car_id )->first();
+        foreach ($reservations as $reservation) {
+            $car = Car::where('id', $reservation->car_id)->first();
             $obj = new stdClass();
             $obj->id = $reservation->id;
             $obj->pick_up_date = $reservation->rent_date_start;
@@ -56,9 +56,8 @@ class UserController extends Controller
             $obj->category = $car->Category->name;
 
             $cars[] = $obj;
-
         }
-        return view('users.show', compact('cars'));
+        return view('users.show', compact('cars', 'id'));
     }
 
     /**
@@ -72,9 +71,36 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         //
+        // $user = Auth::user();
+        $user = User::findOrFail($id);
+        // dd($user->id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+        $image = $user->image;
+       
+        if ($request->hasFile('image')) {
+            $file = $request->image;
+            $name = $file->getClientOriginalName();
+            $file->move(public_path('images'), $name);
+            $image = 'images/' . $name;
+        }
+        // dd($request->image);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->input('password') ? Hash::make($request->input('password')) : $user->password,
+            'image' => $image
+        ]);
+        // dd($tt);
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 
     /**
@@ -92,18 +118,18 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-       $this->validate($request, [
+        $this->validate($request, [
             'email' => 'required',
             'password' => 'required',
             'name' => 'required',
-       ]);
-       User::create([
+        ]);
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-       ]);
-       return redirect()->route('users.login')->with([
-        'success' => 'Account created successfully'
+        ]);
+        return redirect()->route('users.login')->with([
+            'success' => 'Account created successfully'
         ]);
     }
 
@@ -115,11 +141,11 @@ class UserController extends Controller
 
     public function auth(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'email' => "required",
             "password" => "required"
         ]);
-        if(auth()->attempt(['email'=>$request->email,'password'=>$request->password])){
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->route('cars.index');
         } else {
             return redirect()->route('users.login')->with([

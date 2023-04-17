@@ -43,6 +43,8 @@ Route::post('/add/products', [ProductsController::class, 'store'])->name('produc
 
 Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.profile');
 
+Route::put('/user/profile/{id}',[UserController::class,'update'])->name('update_profile');
+
 Route::get('/admin/dashboard', [AdminController::class, 'show'])->name('admins.dashboars');
 
 Route::get('/login', [UserController::class, 'login'])->name('users.login');
