@@ -4,38 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand ps-3" href="{{route('admins.index')}}">Dashboard</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="d-flex">
+            <a class="navbar-brand ps-3" href="{{route('admins.index')}}">Dashboard</a>
+       
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav mr-auto"></ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('users.profile',auth()->user()->id)}}">My Account</a>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{auth()->user()->name}}
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li class="nav-item">
+                          <a class="nav-link text-dark" href="{{route('users.profile',auth()->user()->id)}}">My Account</a>
+                      </li>
+                      <li class="nav-item pe-2">
+                          <form action="{{route('users.logout')}}" method="POST">
+                              @csrf
+                              <button  class="p-2 rounded bg-transparent border-0 text-danger" >Logout</button>
+                            </form>               
+                      </li>
+                  </ul>
                 </li>
-                <li class="nav-item pe-2">
-                    <form action="{{route('users.logout')}}" method="POST">
-                        @csrf
-                        <button  class="p-2 rounded bg-transparent border-0 text-white" >Logout</button>
-                      </form>               
-                </li>
-                {{-- <li class="nav-item">
-                    <form action="{{route('users.logout')}}" method="POST">
-                      @csrf
-                      <button  class="nav-link" >Logout</button>
-                    </form>
-                  </li> --}}
-            </ul>
+              </ul>
         </div>
+    </div>
     </nav>
+    
 
     <div class="container-fluid">
         <button id="toggle-side-bar" style="position: fixed;bottom: 20px; left:20px; padding:10px; background-color:#343a40; z-index:10000" class="btn btn-link d-block d-md-none " type="button" >
@@ -82,8 +85,9 @@
             </main>
         </div>
     </div>
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>   
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("messi");

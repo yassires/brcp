@@ -56,6 +56,9 @@
                   <button type="submit" name="register" class="w-full text-gray-500 border-solid border-2 border-gray-500 bg-white hover:bg-gray-500 hover:text-white rounded-lg text-sm px-5 py-2.5 text-center ">Sign Un</button>
                   
               </form>
+              <div>
+                You have an <span class="text-red-500">Account</span> <a href="{{route('users.login')}}">Log in.</a>
+              </div>
           </div>
         
         
