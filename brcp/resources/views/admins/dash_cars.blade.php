@@ -94,9 +94,10 @@
                     <label for="">Brand</label>
                     <select class="form-control" name="brand" id="">
                         <option value="" selected disabled>Can you select the Brand</option>
-                        <option value="1">Tesla</option>
-                        <option value="2">Porsche</option>
-                        <option value="3">Mercedes</option>
+                        @foreach ($brand as $brand)
+                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                        @endforeach
+                        
                     </select> 
                 </div>
                 <div class="form-group">

@@ -106,9 +106,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
+        $user->delete();
+        return redirect()->route('admins.users')->withSuccess('User deleted  successfully');
     }
 
     public function registr()
@@ -127,7 +129,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ])->assignRole('User');
         return redirect()->route('users.login')->with([
             'success' => 'Account created successfully'
         ]);
@@ -158,5 +160,19 @@ class UserController extends Controller
     {
         auth()->logout();
         return redirect()->route('cars.index');
+    }
+
+
+    public function showOne(User $user){
+        return $user->getRoleNames()[0];
+    }
+
+    public function assignRole(Request $request){
+        $user = User::find($request->user_id);
+        // return $request->role;
+        // return $user;
+        $user->syncRoles([$request->role]);
+
+        return redirect()->back()->with('success', 'Role Changed Successfully');
     }
 }

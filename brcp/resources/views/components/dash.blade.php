@@ -9,22 +9,26 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <div class="d-flex">
-            <a class="navbar-brand ps-3" href="{{route('admins.index')}}">Dashboard</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex">
+        
+            <div>
+               <a class="navbar-brand ps-3" href="{{route('admins.index')}}">Dashboard</a>
        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                <li class="nav-item dropdown">
+        </button> 
+            </div>
+            
+       
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav  mb-2 mb-lg-0 ">
+                <li class="nav-item  dropdown">
                   <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       {{auth()->user()->name}}
                   </a>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                       <li class="nav-item">
-                          <a class="nav-link text-dark" href="{{route('users.profile',auth()->user()->id)}}">My Account</a>
+                          <a class="nav-link text-white" href="{{route('users.profile',auth()->user()->id)}}">My Account</a>
                       </li>
                       <li class="nav-item pe-2">
                           <form action="{{route('users.logout')}}" method="POST">
@@ -36,7 +40,7 @@
                 </li>
               </ul>
         </div>
-    </div>
+       
     </nav>
     
 
@@ -68,6 +72,11 @@
                         <li class="nav-item h1">
                             <a class="nav-link" href="{{route('admins.brands')}}">
                                 <i class="far fa-copyright"></i> Brands
+                            </a>
+                        </li>
+                        <li class="nav-item h1">
+                            <a class="nav-link" href="{{route('admins.users')}}">
+                                <i class="fa-solid fa-users"></i> Users
                             </a>
                         </li>
                     </ul>

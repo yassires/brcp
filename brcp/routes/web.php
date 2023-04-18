@@ -4,9 +4,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
+
 use App\Models\Products;
 use GuzzleHttp\Promise\Create;
 
@@ -21,7 +23,9 @@ use GuzzleHttp\Promise\Create;
 |
 */
 
-Route::get('/', [CarController::class, 'index']);
+
+
+Route::get('/', [HomeController::class, 'welcome']);
 Route::Resource('/cars', CarController::class);
 // Route::post('/cars', [CarController::class, 'index'])->name('cars.index');
 
@@ -43,7 +47,7 @@ Route::post('/add/products', [ProductsController::class, 'store'])->name('produc
 
 Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.profile');
 
-Route::put('/user/profile/{id}',[UserController::class,'update'])->name('update_profile');
+Route::put('/user/profile/{id}', [UserController::class, 'update'])->name('update_profile');
 
 Route::get('/admin/dashboard', [AdminController::class, 'show'])->name('admins.dashboars');
 
@@ -53,16 +57,18 @@ Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
 Route::get('/register', [UserController::class, 'registr'])->name('users.register');
 Route::post('/register', [UserController::class, 'register'])->name('users.register');
 
-
-Route::middleware([
-    'admin',
-])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admins.index');
-    Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.cars');
-    Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products');
-    Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands');
-});
-
-// Route::group(['middleware' => 'admin'], function () {
-//     Route::get('/dashboard', 'DashboardController@index');
+// Route::group(['middleware' => ['role:Admin']],function(){
+//     Route::get('/admin', [AdminController::class, 'index'])->name('admins.index');
+//     Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.cars');
+//     Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products');
+//     Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands');
 // });
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admins.index')->middleware('permission:view dashboard');
+Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.cars')->middleware('permission:view dashboard');
+Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products')->middleware('permission:view dashboard');
+Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands')->middleware('permission:view dashboard');
+Route::get('/admin/users', [AdminController::class, 'userShow'])->name('admins.users')->middleware('permission:view dashboard');
+
+Route::get('admin/users/{user}',[UserController::class,'showOne'])->name('show.users');
+Route::put('role/',[UserController::class,'assignRole'])->middleware('permission:view dashboard')->name('assign.role');

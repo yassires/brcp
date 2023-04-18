@@ -33,10 +33,17 @@ class RolesAndPermissionsSeeder extends Seeder
         $deleteMyReservation ='delete my reservation';
         $deleteAllReservations ='delete all reservations';
 
+        $viewDashboard = 'view dashboard';
+
         $viewCars = 'view cars';
         $addCar = 'add car';
         $editAllCar = 'edit all cars';
         $deleteAllCar = 'delete all cars';
+        
+        $viewProducts = 'view products';
+        $addProduct = 'add product';
+        $editAllProducts = 'edit all Products';
+        $deleteAllProducts = 'delete all Products';
         
         $viewBrands = 'view brands';
         $addBrand = 'add brand';
@@ -71,6 +78,11 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => $addCar]);
         Permission::create(['name' => $editAllCar]);
         Permission::create(['name' => $deleteAllCar]);
+       
+        Permission::create(['name' => $viewProducts]);
+        Permission::create(['name' => $addProduct]);
+        Permission::create(['name' => $editAllProducts]);
+        Permission::create(['name' => $deleteAllProducts]);
 
         Permission::create(['name' => $viewBrands]);
         Permission::create(['name' => $addBrand]);
@@ -80,6 +92,9 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => $assignRole]);
 
         Permission::create(['name' => $viewAllUsers]);
+
+        Permission::create(['name' => $viewDashboard]);
+
 
         Permission::create(['name' => $viewAllContacts]);
         Permission::create(['name' => $viewOneContacts]);
@@ -97,6 +112,9 @@ class RolesAndPermissionsSeeder extends Seeder
             $addCar,
             $editAllCar,
             $deleteAllCar,
+
+            $viewDashboard,
+
 
             $viewBrands,
             $addBrand,
@@ -118,6 +136,11 @@ class RolesAndPermissionsSeeder extends Seeder
             $viewAllContacts,
             $viewOneContacts,
             $DeleteContacts,
+
+            $viewProducts,
+            $addProduct, 
+            $editAllProducts, 
+            $deleteAllProducts,  
 
         ]);
 

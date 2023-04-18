@@ -7,24 +7,31 @@
     <title>BRCP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">  </head>
-    
+    <link rel="stylesheet" href="{{asset('css/welcome_style.css')}}" />
+
     <body>
-    <div class="container">
-      <div class="header">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-            <a class="navbar-brand " href="/">   
-              <img src="{{asset('img/logo/1.png')}}" alt="" style="width: 100px" >
-            </a>
+      <header class="text-center mb-5" style="height: 8vh;">
+          <nav class="navbar navbar-expand-lg ">
+          <div class="container d-flex">
+            <a class="navbar-brand" href="#"><img src="css/img/1.png" class="" width="80" alt="" /> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse  justify-content-end " id="navbarSupportedContent">
+              <ul class="navbar-nav  mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  <a class="nav-link active " aria-current="page" href="/">Home</a>
                 </li>
-               @auth
+                <li class="nav-item">
+                  <a class="nav-link active border-bottom" aria-current="page" href="#">Buy</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active border-bottom" aria-current="page" href="#">Rent</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active border-bottom" aria-current="page" href="#">Products</a>
+                </li>
+                @auth
                     <li class="nav-item">
                       @if (Auth::user()->is_admin == 1)
                         
@@ -41,7 +48,7 @@
                     <li class="nav-item">
                       <form action="{{route('users.logout')}}" method="POST">
                         @csrf
-                        <button  class="nav-link" >Logout</button>
+                        <button  class="nav-link bg-transparent border-0" >Logout</button>
                       </form>
                     </li>
                   @else
@@ -56,14 +63,14 @@
             </div>
           </div>
         </nav>
-      </div>
-        <div class="row">
+      </header>
+      
+        <div class="">
             <div class="col-md-6 mx-auto my-4">
                 @include('includes.messages')
             </div>
         </div>
         @yield('content')
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>   
      @yield('scripts')
 </body>
