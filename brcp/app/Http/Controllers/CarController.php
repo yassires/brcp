@@ -13,21 +13,19 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, $pg)
     {
-        $cars = Car::with('Brand', 'Category')->paginate(5);
-        $a_cars = Car::whereAvailable(1)->get();
+        // return "sososososo";
+        if ($pg == "0") {
+            $cars = Car::with('Brand', 'Category')->where('sell_rent', 0)->get();
+        } else if ($pg == "1") {
+            $cars = Car::with('Brand', 'Category')->where('sell_rent', 1)->get();
+        } else {
+            // return 'messi';
+            return abort(404);
+        }
 
-        // if ($request->search !== null) {
-        //     $car = Car::where('brand', '=', $request->search)
-        //     ->orderByDesc('created_at')
-        //     ->get();
-        //     dd($car);
-        //     return view('cars.index')->with([
-        //         'cars' => $car,
-        //         'title' =>"Result found for : ".$request->search
-        //     ]);
-        // } else {
+
         return view('cars.index')->with([
             'cars' => $cars,
             'title' => "All Cars"
@@ -116,14 +114,14 @@ class CarController extends Controller
             'available' => 'required',
         ]);
         $image = $car->image;
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $file = $request->image;
             $name = $file->getClientOriginalName();
             $file->move(public_path('images'), $name);
-            $image = 'images/'.$name;
+            $image = 'images/' . $name;
         }
         dd($request->image);
-        
+
         $car->update([
             'brand' => $request->brand,
             'name' => $request->name,
@@ -144,6 +142,5 @@ class CarController extends Controller
         //
         $car->delete();
         return redirect()->route('admins.cars')->withSuccess('Car deleted  successfully');
-
     }
 }

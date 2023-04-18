@@ -27,7 +27,7 @@ use GuzzleHttp\Promise\Create;
 
 Route::get('/', [HomeController::class, 'welcome']);
 Route::Resource('/cars', CarController::class);
-// Route::post('/cars', [CarController::class, 'index'])->name('cars.index');
+Route::get('/cars/type/{pg}', [CarController::class, 'index'])->name('cars.type');
 
 Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 

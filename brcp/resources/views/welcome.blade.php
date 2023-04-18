@@ -26,10 +26,10 @@
                   <a class="nav-link active " aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active border-bottom" aria-current="page" href="{{route('cars.index')}}">Buy</a>
+                  <a class="nav-link active border-bottom" aria-current="page" href="/cars/type/1">Buy</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active border-bottom" aria-current="page" href="#">Rent</a>
+                  <a class="nav-link active border-bottom" aria-current="page" href="/cars/type/0">Rent</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active border-bottom" aria-current="page" href="#">Products</a>
