@@ -35,33 +35,35 @@
                   <a class="nav-link active border-bottom" aria-current="page" href="#">Products</a>
                 </li>
                 @auth
-                    <li class="nav-item">
-                      @if (Auth::user()->is_admin == 1)
-                        
-                          <a class="nav-link border-bottom border-primary" href="{{route('admins.index')}}">
-                            Dashboard
-                          </a>
-                      @else
-                          <a class="nav-link" href="{{route('users.profile',auth()->user()->id)}}">
-                            {{auth()->user()->name}}
-                          </a>
-                      @endif
-                      
-                    </li>
-                    <li class="nav-item">
-                      <form action="{{route('users.logout')}}" method="POST">
-                        @csrf
-                        <button  class="nav-link bg-transparent border-0" >Logout</button>
-                      </form>
-                    </li>
+                <li class="nav-item">
+                 
+                  @if(auth()->user()->hasAnyRole(['Admin', 'Manager']))
+                    
+                      <a class="nav-link border-bottom border-primary" href="{{route('admins.index')}}">
+                        Dashboard
+                      </a>
+                  
                   @else
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{route('users.register')}}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{route('users.login')}}">Login</a>
-                    </li>
-               @endauth
+                      <a class="nav-link" href="{{route('users.profile',auth()->user()->id)}}">
+                        {{auth()->user()->name}}
+                      </a>
+                  @endif
+                  
+                </li>
+                <li class="nav-item">
+                  <form action="{{route('users.logout')}}" method="POST">
+                    @csrf
+                    <button  class="nav-link bg-transparent border-0" >Logout</button>
+                  </form>
+                </li>
+              @else
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('users.register')}}">Register</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('users.login')}}">Login</a>
+                </li>
+           @endauth
               </ul>
             </div>
           </div>
@@ -108,7 +110,7 @@
         <p class="font-italic text-muted mb-5">Explore below our best car services experience like never before</p>
       </div>
 
-      <div class="row pb-5 mb-4 container">
+      <div class="row pb-5 mb-4 container-fluid">
 
         @foreach($cars as $car)
             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">

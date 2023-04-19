@@ -10,8 +10,7 @@ class HomeController extends Controller
 {
     public function welcome()
     {
-        $cars = Car::all();
-        // $car_id=Car::id();
+        $cars = Car::limit(4)->get();
         return view('welcome',compact('cars'));
     }
 }

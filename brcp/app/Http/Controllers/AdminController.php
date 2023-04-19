@@ -27,10 +27,10 @@ class   AdminController extends Controller
         $car = Car::with('Brand','Category')->get();
         $brand = Brand::all();
         $product = Products::all();
-        $user= User::count();
+        $users= User::all();
         $reservation = Reservation::all();
         // dd($car);
-        return view('admins.dashboard', compact('car','brand','product','user','reservation'));
+        return view('admins.dashboard', compact('car','brand','product','users','reservation'));
        
     }
     public function show(){

@@ -83,7 +83,7 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
         ]);
         $image = $user->image;
-       
+
         if ($request->hasFile('image')) {
             $file = $request->image;
             $name = $file->getClientOriginalName();
@@ -148,9 +148,9 @@ class UserController extends Controller
             "password" => "required"
         ]);
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('cars.index');
+            return redirect('/');
         } else {
-            return redirect()->route('users.login')->with([
+            return redirect('login')->with([
                 'error' => 'Email or Password is incorrect'
             ]);
         }
@@ -159,15 +159,17 @@ class UserController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect()->route('cars.index');
+        return redirect('/');
     }
 
 
-    public function showOne(User $user){
+    public function showOne(User $user)
+    {
         return $user->getRoleNames()[0];
     }
 
-    public function assignRole(Request $request){
+    public function assignRole(Request $request)
+    {
         $user = User::find($request->user_id);
         // return $request->role;
         // return $user;

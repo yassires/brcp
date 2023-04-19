@@ -1,6 +1,6 @@
  <x-dash>
  {{---------Brands table---------}}
- <div class="row my-4">
+ <div class=" my-4">
     <div class="col-md-12">
         <div class="form-group">
             <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addBrand">
@@ -18,7 +18,8 @@
                 </div>
             @endif
             <div class="card-body">
-                <table class="table" id="example1">
+                <div class="overflow-auto">
+                     <table class="table" id="example1">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -56,6 +57,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                </div>
+               
             </div>
         </div>
     </div>

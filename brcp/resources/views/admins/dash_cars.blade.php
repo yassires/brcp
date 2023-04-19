@@ -1,6 +1,6 @@
 <x-dash>
    {{---------Cars table---------}}
-   <div class="row my-4">
+   <div class="my-4  w-100">
     <div class="col-md-12">
         <div class="form-group">
             <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addCar">
@@ -18,7 +18,8 @@
                 </div>
             @endif
             <div class="card-body">
-                <table class="table" id="example2">
+                <div class="overflow-auto">
+                    <table class="table" id="example2">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -73,6 +74,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -87,7 +90,7 @@
           <h1 class="modal-title fs-5" id="addCar">Add Car</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body ">
             <form action="{{route('cars.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -100,49 +103,57 @@
                         
                     </select> 
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-2">
                     <label for="">name</label>
                     <input type="text" name="name"
                     id="" class="form-control"
                     placeholder="name">
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-2">
                     <label for="">Category</label>
                     <select class="form-control" name="category" id="">
-                        <option value="" selected disabled>Can you select the Category</option>
+                        <option value="1" selected disabled>Can you select the Category</option>
                         <option value="1">Diesle</option>
                         <option value="2">Gasoline</option>
                         <option value="3">Electric</option>
                         <option value="4">Hybrid</option>
                     </select>   
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-2">
                     <label for="">Color</label>
                     <input type="text" name="color"
                     id="" class="form-control"
                     placeholder="white">
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-2">
                     <label for="">Price for rent</label>
                     <input type="number" name="price_rent"
                     id="" class="form-control"
                     placeholder="500$">
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-2">
                     <label for="">Price for sell</label>
                     <input type="number" name="price_sell"
                     id="" class="form-control"
                     placeholder="500$">
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-2">
                     <label for="">Availability</label>
                     <select class="form-control" name="available" id="">
-                        <option value="" selected disabled>Select an option</option>
+                        <option value="1" selected disabled>Select an option</option>
                         <option value="1">Available</option>
                         <option value="0">Reserved</option>
                     </select>   
                 </div>
-                <div class="form-group">
+                <div class="form-group pt-2">
+                    <label for="">Sell / Rent</label>
+                    <select class="form-control" name="sell_rent" id="">
+                        <option value="1" selected disabled>Select an option</option>
+                        <option value="1">Sell</option>
+                        <option value="0">Rent</option>
+                    </select>   
+                </div>
+                <div class="form-group pt-2">
                     <label for="">Image</label>
                     <input type="file" name="image"
                     id="" class="form-control"

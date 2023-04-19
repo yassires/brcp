@@ -16,7 +16,8 @@ class Car extends Model
           'price_rent',
           'price_sell',
           'image',
-          'available'
+          'available',
+          'sell_rent'
      ];
 
      public function Brand()

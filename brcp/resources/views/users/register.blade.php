@@ -30,7 +30,7 @@
         
             <div div class="p-6 space-y-4 md:space-y-6 sm:p-8 p-10">
                 <div class="flex justify-center">
-                    <img src="img\logo\1.png" alt="" style="width: 150px">
+                    <img src="css\img\logo\1.png" alt="" style="width: 150px">
                 </div>    
                 
               <h1 class="text-sm   text-gray-500 md:text-2xl ">
@@ -53,7 +53,7 @@
                       <label for="password" class="block mb-2 text-sm font-medium text-gray-500 ">Password</label>
                       <input type="password" name="password" id="password" placeholder="••••••••" class=" border border-2 border-gray-500 text-gray-500 sm:text-sm rounded-lg   block w-full p-2.5   placeholder-gray-300 " required="">
                   </div>
-                  <button type="submit" name="register" class="w-full text-gray-500 border-solid border-2 border-gray-500 bg-white hover:bg-gray-500 hover:text-white rounded-lg text-sm px-5 py-2.5 text-center ">Sign Un</button>
+                  <button type="submit" name="register" class="w-full text-gray-500 border-solid border-2 border-gray-500 bg-white hover:bg-gray-500 hover:text-white rounded-lg text-sm px-5 py-2.5 text-center ">Sign Up</button>
                   
               </form>
               <div>

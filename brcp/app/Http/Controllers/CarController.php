@@ -21,7 +21,6 @@ class CarController extends Controller
         } else if ($pg == "1") {
             $cars = Car::with('Brand', 'Category')->where('sell_rent', 1)->get();
         } else {
-            // return 'messi';
             return abort(404);
         }
 
@@ -60,6 +59,7 @@ class CarController extends Controller
             'price_rent' => 'required',
             'price_sell' => 'required',
             'available' => 'required',
+            'sell_rent' => 'required',
             'image' => 'required',
         ]);
         // dd($request->all());
@@ -76,6 +76,7 @@ class CarController extends Controller
             'price_rent' => $request->price_rent,
             'price_sell' => $request->price_sell,
             'available' => $request->available,
+            'sell_rent' => $request->sell_rent,
             'image' => '/images/' . $name,
         ]);
         return redirect()->route('admins.cars')->withSuccess('Car added successfully');
