@@ -150,6 +150,8 @@
            </div>
        </div>
    </div>
+
+   
    {{-- Users table --}}
    <div class="col-md-4">
       
@@ -194,7 +196,8 @@
           </div>
       </div>
   </div>
-   {{-- Users table --}}
+
+
    {{---------Product table---------}}
    <div class="col-md-6">
       <div class="card shadow">

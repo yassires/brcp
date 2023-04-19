@@ -71,6 +71,7 @@ body {
   color: white;
  }
 
+
  @media screen and (max-width: 992px) {
   .iframe_r{
     width: 365px;
@@ -81,4 +82,7 @@ body {
     width: 400px!important;
     height: 230px!important;
   }
+  
 }
+
+

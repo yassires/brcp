@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex">
@@ -30,8 +30,21 @@
                       {{auth()->user()->name}}
                     </a>
                  </div>
+                 <div class="dropdown">
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="{{route('users.profile',auth()->user()->id)}}">My Account</a>
+                      </li>
+                      <li class="nav-item pe-2">
+                        <form action="{{route('users.logout')}}" method="POST">
+                          @csrf
+                          <button class="p-2 rounded bg-transparent border-0 text-danger">Logout</button>
+                        </form>               
+                      </li>
+                    </ul>
+                  </div>
                 
-                  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                  {{-- <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                       <li class="nav-item">
                           <a class="nav-link text-white" href="{{route('users.profile',auth()->user()->id)}}">My Account</a>
                       </li>
@@ -41,8 +54,9 @@
                               <button  class="p-2 rounded bg-transparent border-0 text-danger" >Logout</button>
                             </form>               
                       </li>
-                  </ul>
+                  </ul> --}}
                 </li>
+                
               </ul>
         </div>
        
@@ -79,11 +93,13 @@
                                 <i class="far fa-copyright"></i> Brands
                             </a>
                         </li>
+                        @hasanyrole('Admin')
                         <li class="nav-item h1">
                             <a class="nav-link" href="{{route('admins.users')}}">
                                 <i class="fa-solid fa-users"></i> Users
                             </a>
                         </li>
+                        @endhasanyrole
                     </ul>
                 </div>
                 
@@ -99,10 +115,24 @@
             </main>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> --}}
+
     <script>
+const dropdownMenu = document.querySelector('.dropdown-menu');
+const dropdownToggle = document.querySelector('.dropdown-toggle');
+
+dropdownToggle.addEventListener('click', () => {
+  dropdownMenu.classList.toggle('show');
+});
+
+document.addEventListener('click', (event) => {
+  if (!dropdownToggle.contains(event.target)) {
+    dropdownMenu.classList.remove('show');
+  }
+});
+
         function toggleSidebar() {
             var sidebar = document.getElementById("messi");
             sidebar.classList.toggle("active-messi");

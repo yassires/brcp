@@ -123,12 +123,15 @@
                 <h6>Price : {{ $car->price_sell }}</h6>
                 <h6>Fuel Type : {{ $car->Category->name }}</h6>
                 <div class="d-flex justify-content-between pt-2">
-                    <ul class="list-inline small">
-                    <button type="button" class="btn btn-danger">Rent Now</button>
-                    </ul>
-                    <ul class="list-inline small">
-                    <button type="button" class="btn btn-light border-secondary">Buy</button>
-                    </ul>
+                  @if ( $car->sell_rent == 0 )
+                      <ul class="list-inline small">
+                      <button type="button" class="btn btn-danger "><a class="text-white text-decoration-none" href="{{route('reservations.create',$car->id)}}">Rent Now</a></button>
+                      </ul>
+                  @else
+                      <ul class="list-inline small">
+                      <button type="button" class="btn btn-light border-secondary">Buy</button>
+                      </ul>
+                  @endif
                 </div>
                 </div>
             </div>
