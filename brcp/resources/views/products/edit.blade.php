@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
+        <h1>EDIT</h1>
         <div class="row my-5">
             <div class="col-md-12 mx-auto">
                 <div class="card bg-light">
                     <h3 class="card-header">
-                        Edit a Car
+                        Edit Product
                     </h3>
                     <div class="card-body">
                                 @foreach ($errors->all() as $error)

@@ -12,34 +12,6 @@ function closeNav() {
   document.getElementById("main").style.display="block";  
 }
 
-function search() {
-  let input = document.getElementById("myInput");
-  let filter = input.value.toUpperCase();
-  let divCard = document.getElementById("cars");
-  tr = divCard.getElementsByTagName("tr");
-  for (let i = 0; i < tr.length; i++) {
-    let name = tr[i].getElementsByTagName("td")[0].children[0].children[1];
-    let artist = tr[i].getElementsByTagName("td")[1].children[0].children[0];
-    if (name || artist) {
-      txtValue = (name.textContent || name.innerText);
-      d = (artist.textContent || artist.innerText)
-      if (txtValue.toUpperCase().indexOf(filter) > -1 || d.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-    // if (artist) {
-    //   txtValue = artist.textContent || artist.innerText;
-    //   if (txtValue.toUpperCase().indexOf(filter) > -1) {
-    //     tr[i].style.display = ""
-    //   } else {
-    //     tr[i].style.display = "none";
-    //   }
-    // }
-
-  }
-}
 
 
 // function searchCards() {

@@ -1,12 +1,16 @@
 @extends('layouts.master')
+@section('title')
+   RBCP | Edit Brand
+@endsection
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
+        <h1>EDIT</h1>
         <div class="row my-5">
             <div class="col-md-12 mx-auto">
                 <div class="card bg-light">
                     <h3 class="card-header">
-                        Edit a Brand
+                        Edit  Brand
                     </h3>
                     <div class="card-body">
                         <form action="{{route('Brands.update',$brand->id)}}" method="POST" enctype="multipart/form-data">

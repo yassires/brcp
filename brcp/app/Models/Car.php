@@ -22,10 +22,10 @@ class Car extends Model
 
      public function Brand()
      {
-          return $this->belongsTo(Brand::class, 'brand');
+          return $this->belongsTo(Brand::class);
      }
      public function Category()
      {
-          return $this->belongsTo(Category::class, 'category');
+          return $this->belongsTo(Category::class);
      }
 }

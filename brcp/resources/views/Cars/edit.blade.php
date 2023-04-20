@@ -1,12 +1,15 @@
 @extends('layouts.master')
-
+@section('title')
+   RBCP | Edit Car
+@endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
+        <h1>EDIT</h1>
         <div class="row my-5">
             <div class="col-md-12 mx-auto">
                 <div class="card bg-light">
                     <h3 class="card-header">
-                        Edit a Car
+                        Edit  Car
                     </h3>
                     <div class="card-body">
                         <form action="{{route('cars.update',$car->id)}}" method="POST" enctype="multipart/form-data">
@@ -68,7 +71,7 @@
                                 </select>   
                             </div>
                             <div class="form-group">
-                                <img src="/{{$car->image}}" width="100" height="100" alt="" class="img-fluid rounded">
+                                <img src="{{asset($car->image)}}" width="100" height="100" alt="" class="img-fluid rounded">
                                 <label for="">Image</label>
                                 <input type="file" name="image"
                                 id="" class="form-control"

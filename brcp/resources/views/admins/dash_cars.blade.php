@@ -1,5 +1,11 @@
 <x-dash>
    {{---------Cars table---------}}
+   
+   <div class="">
+        <div class="col-md-6 mx-auto my-4">
+            @include('includes.messages')
+        </div>
+    </div>
    <div class="my-4  w-100">
     <div class="col-md-12">
         <div class="form-group">

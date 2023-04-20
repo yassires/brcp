@@ -1,6 +1,11 @@
 <x-dash>
-    {{-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js%22%3E"> </script> --}}
     {{---------Users table---------}}
+    
+    <div class="">
+        <div class="col-md-6 mx-auto my-4">
+            @include('includes.messages')
+        </div>
+    </div>
     <div class="row my-4">
        <div class="col-md-12">
            <div class="card">
@@ -44,7 +49,7 @@
                                         <i class="fa fa-edit"></i>
                                     </a>
                                    </div>
-                                   <form action="" method="POST">
+                                   <form action="{{route('user.destroy',$user->id)}}" method="POST">
                                        @csrf
                                        {{method_field('delete')}}
                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>

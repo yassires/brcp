@@ -4,7 +4,6 @@
     <div class="container-fluid">
      <h1>Profile</h1>
   </div>
- 
      <div class="row my-4 container">
         <div class="col-md-4">
             <div class="card text-left">
