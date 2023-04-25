@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use App\Http\Requests\StoreCarRequest;
-use App\Http\Requests\UpdateCarRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCarRequest;
+use App\Http\Requests\UpdateCarRequest;
 
 class CarController extends Controller
 {
@@ -69,9 +69,9 @@ class CarController extends Controller
         $file->move(public_path('images'), $name);
 
         Car::create([
-            'brand' => $request->brand,
             'name' => $request->name,
-            'category' => $request->category,
+            'brand_id' =>   $request->brand,
+            'category_id' => $request->category,
             'color' => $request->color,
             'price_rent' => $request->price_rent,
             'price_sell' => $request->price_sell,

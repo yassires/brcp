@@ -1,4 +1,7 @@
  <x-dash>
+    @section('title')
+    Dashboard | Brands        
+    @endsection
  {{---------Brands table---------}}
  <div class=" my-4">
     <div class="col-md-12">

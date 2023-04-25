@@ -28,6 +28,7 @@ use GuzzleHttp\Promise\Create;
 Route::get('/', [HomeController::class, 'welcome']);
 Route::Resource('/cars', CarController::class);
 Route::get('/cars/type/{pg}', [CarController::class, 'index'])->name('cars.type');
+Route::get('/cars/buy/{id}', [CarController::class, 'show'])->name('cars.buy');
 
 Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 
@@ -49,7 +50,7 @@ Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.p
 Route::Resource('user',UserController::class);
 Route::put('/user/profile/{id}', [UserController::class, 'update'])->name('update_profile');
 // Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('users.delete');
-Route::get('/admin/dashboard', [AdminController::class, 'show'])->name('admins.dashboars');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admins.dashboars');
 
 Route::get('/login', [UserController::class, 'login'])->name('users.login');
 Route::post('/auth', [UserController::class, 'auth'])->name('users.auth');

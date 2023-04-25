@@ -1,4 +1,7 @@
 <x-dash>
+    @section('title')
+    Dashboard | Cars        
+    @endsection
    {{---------Cars table---------}}
    
    <div class="">
@@ -103,6 +106,7 @@
                     <label for="">Brand</label>
                     <select class="form-control" name="brand" id="">
                         <option value="" selected disabled>Can you select the Brand</option>
+                        {{-- @dd($brand) --}}
                         @foreach ($brand as $brand)
                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                         @endforeach

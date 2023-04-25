@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('brand_id')->default(3);
-            $table->integer('category')->default(1);
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('brand_id')->references("id")->on("brands")->onDelete("cascade")->default(1);
+            $table->foreign('category_id')->references("id")->on("categories")->onDelete("cascade")->default(1);
             $table->string('color');
             $table->decimal('price_sell');
             $table->decimal('price_rent');

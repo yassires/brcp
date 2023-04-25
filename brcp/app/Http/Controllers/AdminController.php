@@ -29,13 +29,13 @@ class   AdminController extends Controller
         $product = Products::all();
         $users= User::all();
         $reservation = Reservation::all();
-        // dd($car);
+        // dd($users);
         return view('admins.dashboard', compact('car','brand','product','users','reservation'));
        
     }
     public function show(){
-        // $user = User::all();
-        return view('admins.dashboard' , compact('user'));
+        $users = User::all();
+        return view('admins.dashboard' , compact('users'));
     }
     public function carShow()
     {

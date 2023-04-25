@@ -1,4 +1,7 @@
 <x-dash>
+    @section('title')
+    Dashboard | Users
+    @endsection
     {{---------Users table---------}}
     
     <div class="">

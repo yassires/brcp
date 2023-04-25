@@ -1,5 +1,7 @@
 <x-dash>
-
+    @section('title')
+        Dashboard | Products        
+    @endsection
     {{---------Products table---------}}
     
     <div class="">

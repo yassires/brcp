@@ -179,7 +179,7 @@
                       <tr>
                           <td>{{$user->id}}</td>
                           <td>{{$user->name}}</td>
-                          <td>{{ $user->getRoleNames()[0]}}</td>
+                          <td>{{$user->getRoleNames()[0]}}</td>
                           <td>
                               <img src="{{asset($user->image)}}"
                               width="60px"
