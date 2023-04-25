@@ -61,4 +61,10 @@ class   AdminController extends Controller
         $users = User::all();
         return view('admins.dash_users', compact('users'));
     }
+
+    public function reservationShow()
+    {
+        $reservation = Reservation::all();
+        return view('admins.dash_reservations', compact('reservation'));
+    }
 }

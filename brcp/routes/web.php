@@ -28,7 +28,7 @@ use GuzzleHttp\Promise\Create;
 Route::get('/', [HomeController::class, 'welcome']);
 Route::Resource('/cars', CarController::class);
 Route::get('/cars/type/{pg}', [CarController::class, 'index'])->name('cars.type');
-Route::get('/cars/buy/{id}', [CarController::class, 'show'])->name('cars.buy');
+// Route::get('/cars/buy/{id}', [CarController::class, 'show'])->name('cars.buy');
 
 Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 
@@ -70,6 +70,7 @@ Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.car
 Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products')->middleware('permission:view dashboard');
 Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands')->middleware('permission:view dashboard');
 Route::get('/admin/users', [AdminController::class, 'userShow'])->name('admins.users')->middleware('permission:view dashboard');
+Route::get('/admin/users', [AdminController::class, 'reservationShow'])->name('admins.reservations')->middleware('permission:view dashboard');
 
 Route::get('admin/users/{user}',[UserController::class,'showOne'])->name('show.users');
 Route::put('role/',[UserController::class,'assignRole'])->middleware('permission:view dashboard')->name('assign.role');

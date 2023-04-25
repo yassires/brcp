@@ -87,7 +87,8 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('cars.show', compact('car'));
+        $car_l = Car::limit(4)->get();
+        return view('cars.show', compact('car','car_l'));
     }
 
     /**

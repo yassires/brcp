@@ -2,6 +2,16 @@
 
 @section('content')
 <div>
+  
+  @if ($errors->any())
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+@endif
     <!-- First Row-->
     <div class="d-grid justify-content-center text-center ">
         <h5 class="text-danger">BRANDS</h5>
@@ -21,7 +31,7 @@
       <!------------ Cars Brands----------- -->
 
 
-     <div class="container-fluid">
+     <div class="container-fluid pb-5">
         
             <h1>All Cars</h1>
 
@@ -43,11 +53,11 @@
                         <div class="d-flex justify-content-between pt-2">
                             @if ( $car->sell_rent == 0 )
                                 <ul class="list-inline small">
-                                    <button type="button" class="btn btn-danger "><a class="text-white text-decoration-none" href="{{route('reservations.create',$car->id)}}">Rent Now</a></button>
+                                    <button type="button" class="btn btn-danger "><a class="text-white  text-decoration-none" href="{{route('cars.show',$car->id)}}">Rent Now</a></button>
                                 </ul>
                             @else
                                 <ul class="list-inline small">
-                                    <button type="button" class="btn btn-light border-secondary">Buy</button>
+                                    <button type="button" class="btn btn-light border-secondary"><a class="text-dark text-decoration-none" href="{{route('cars.show',$car->id)}}">Buy</a></button>
                                 </ul>
                             @endif
                         </div>

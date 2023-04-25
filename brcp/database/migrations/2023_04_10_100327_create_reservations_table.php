@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('rent_date_start');
             $table->dateTime('rent_date_end');
             $table->decimal('price_rent');
+            $table->enum('status', ['Accepted','Pending' ,'Rejected']);
             $table->timestamps();
         });
     }

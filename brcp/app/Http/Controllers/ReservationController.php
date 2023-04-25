@@ -40,10 +40,11 @@ class ReservationController extends Controller
             // 'user_id' => 'required',
             'car_id' => 'required',
             'rent_date_start' => 'required|date|after_or_equal:today',
-            'rent_date_end' => 'required',
+            'rent_date_end' => 'required|date|after:rent_date_start',
         ],
         [
-            'start_time.after_or_equal' => 'The Reservation date must today or after tomorrow.',
+            'start_time.after_or_equal' => 'The Reservation date must be today or after today.',
+            'end_time.after' => 'The Reservation date must be after the pick-up date',
        
         ]);
         $car = Car::find($request->car_id);
@@ -63,7 +64,7 @@ class ReservationController extends Controller
         $car->update([
             'available' => 0
         ]);
-        return redirect()->route('cars.index')->with([
+        return redirect()->route('cars.type',0)->with([
             'success' => 'Reservation added successfully'
         ]);
     }

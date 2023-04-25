@@ -89,16 +89,17 @@
         </section>
       </header>
 
+      
       <!------------ Cars Brands----------- -->
-      <div>
+      <div class="pb-5">
         <div class="d-flex flex-wrap justify-content-center justify-content-around text-decoration-none">
-          <div><img src="css/img/nissan_logo.png" width="85" class="object-fit-co ntain img-fluid rounded photo mb-2" alt=""/></div>
-          <div><img src="css/img/Tesla_logo.png" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
-          <div><img src="css/img/bmw_logo.png" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
-          <div><img src="css/img/Mercedes.png" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
-          <div><img src="css/img/dacia_logo.png" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
-          <div><img src="css/img/vendor-2.png" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
-          <div><img src="css/img/vw_logo.png" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
+          <div><img src="{{asset('css/img/ford_logo.png')}}" width="85" class="object-fit-co ntain img-fluid rounded photo mb-2" alt=""/></div>
+          <div><img src="{{asset('css/img/Tesla_logo.png')}}" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
+          <div><img src="{{asset('css/img/bmw_logo.png')}}" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
+          <div><img src="{{asset('css/img/Mercedes.png')}}" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
+          <div><img src="{{asset('css/img/dacia_logo.png')}}" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
+          <div><img src="{{asset('css/img/vendor-2.png')}}" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
+          <div><img src="{{asset('css/img/vw_logo.png')}}" width="85" class="object-fit-contain img-fluid rounded photo" alt="" /></div>
         </div>
       </div>
       <!------------ Cars Brands----------- -->
@@ -125,11 +126,11 @@
                 <div class="d-flex justify-content-between pt-2">
                   @if ( $car->sell_rent == 0 )
                       <ul class="list-inline small">
-                      <button type="button" class="btn btn-danger "><a class="text-white text-decoration-none" href="{{route('reservations.create',$car->id)}}">Rent Now</a></button>
+                      <button type="button" class="btn btn-danger "><a class="text-white text-decoration-none" href="{{route('cars.show',$car->id)}}">Rent Now</a></button>
                       </ul>
                   @else
                       <ul class="list-inline small">
-                      <button type="button" class="btn btn-light border-secondary">Buy</button>
+                      <button type="button" class="btn btn-light border-secondary"><a class="text-dark text-decoration-none" href="{{route('cars.show',$car->id)}}">Buy</a></button>
                       </ul>
                   @endif
                 </div>
