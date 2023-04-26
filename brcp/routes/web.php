@@ -34,6 +34,7 @@ Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 
 Route::Resource('/reservation', ReservationController::class);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
+Route::put('reservation/{reservation}',[ReservationController::class, 'create'])->middleware('permission:update reservations')->name('reservations.update');
 // Route::delete('/reservation/{resrvationId}/delete', [ReservationController::class, 'deleteUserResrvation'])->name('reservation.delete');
 
 
@@ -70,7 +71,7 @@ Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.car
 Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products')->middleware('permission:view dashboard');
 Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands')->middleware('permission:view dashboard');
 Route::get('/admin/users', [AdminController::class, 'userShow'])->name('admins.users')->middleware('permission:view dashboard');
-Route::get('/admin/users', [AdminController::class, 'reservationShow'])->name('admins.reservations')->middleware('permission:view dashboard');
+Route::get('/admin/reservations', [AdminController::class, 'reservationShow'])->name('admins.reservations')->middleware('permission:view dashboard');
 
 Route::get('admin/users/{user}',[UserController::class,'showOne'])->name('show.users');
 Route::put('role/',[UserController::class,'assignRole'])->middleware('permission:view dashboard')->name('assign.role');

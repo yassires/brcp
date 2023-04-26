@@ -16,12 +16,9 @@
 
 <div class="my-4  w-100">
 <div class="col-md-12">
-    <div class="form-group">
-        <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addCar">
-            <i class="fa fa-plus"></i>
-        </button>
-    </div>
-    <div class="card">
+    
+    <div class="card shadow">
+        <h1 class="p-4">Reservations</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -48,6 +45,9 @@
                 <tbody>
                     @foreach ($reservation as $reservation)
                     <tr>
+                        {{-- @php
+                            dd($reservation->user->name);
+                        @endphp --}}
                         <td>{{$reservation->id}}</td>
                         <td>{{$reservation->user->name}}</td>
                         <td>{{$reservation->car->name}}</td>
@@ -58,9 +58,9 @@
 
                         <td class="d-flex flex-row justify-content-center">
                             <div class="pe-3">
-                                <a href="{{route('reservations.edit',$reservation->id)}}" class="btn btn-warning mr-2"><i class="fa fa-edit"></i></a>
+                                <a  onclick="editReservation({{ $reservation->id }})" class="btn btn-warning mr-2"><i class="fa fa-edit"></i></a>
                             </div>
-                            <form action="{{route('reservations.destroy',$reservation->id)}}" method="POST">
+                            <form action="{{route('reservation.destroy',$reservation->id)}}" method="POST">
                                 @csrf
                                 {{method_field('delete')}}
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
@@ -78,35 +78,67 @@
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade me-auto" id="editReservation" tabindex="-1" aria-labelledby="editReservation" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h1 class="modal-title fs-5" id="editReservation">edit reservation</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body ">
-        <form action="{{route('cars.store')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            
-            <div class="form-group pt-2">
-                <label for="">Availability</label>
-                <select class="form-control" name="available" id="">
-                    <option value="1" selected disabled>Select an option</option>
-                    <option value="1">Available</option>
-                    <option value="0">Reserved</option>
-                </select>   
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-warning">Edit</button>
+<!-- MODAL -->
+<div class="modal fade" id="modal-reservation" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="{{ route('reservation.update') }}" method="POST" id="form" >
+          @csrf
+          @method('PUT')
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title">Reservation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+            {{-- Hidden input --}}
+            <input id="reservation-id" hidden name="id" type="text">
+
+          <div class="modal-body">
+            <div class="mb-3">
+                <label class="form-label" >Status</label>
+                <select name="status"  class="form-select" aria-label="Default select example">
+                    <option value="Accepted">Accepted</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Rejected">Rejected</option>
+                </select>                  
               </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" data-bs-dismiss="modal" class="btn btn-secondary" >Cancel</button>
+            <button type="submit" name="update" class="btn btn-warning task-action-btn" id="update">Update</button>
+          </div>
         </form>
+      </div>
     </div>
+</div>
+
+
+
+<script>
+    function editReservation(id) {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let reservation = JSON.parse(xhr.responseText);
+
+                console.log(reservation);
+
+                //Setting the value of the hidden input as id
+                document.querySelector('#modal-reservation #reservation-id').value = reservation.reservation.id;
+                // Condition that selects the option in status update
+                if(reservation.reservation.status == 'Accepted' || reservation.reservation.status == 'Pending' || reservation.reservation.status == 'Rejected'){
+                    document.querySelector('#modal-reservation [name=status] option[value='+reservation.reservation.status+']').selected = true;
+                }
+                else {
+                    document.querySelector('#modal-reservation [name=status] option').selected = true;
+                }
+            }
+        }
+        xhr.open("GET", "reservations/" + id, true);
+        xhr.send();
+    }
     
-  </div>
-</div>
-</div>
+</script>
+
 
 </x-dash> 

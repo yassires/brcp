@@ -148,7 +148,7 @@ class UserController extends Controller
             "password" => "required"
         ]);
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect('/');
+            return redirect('/admin');
         } else {
             return redirect('login')->with([
                 'error' => 'Email or Password is incorrect'

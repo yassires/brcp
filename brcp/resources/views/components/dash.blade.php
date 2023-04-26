@@ -100,14 +100,14 @@
                             </a>
                         </li>
                         @endhasanyrole
-
                         
+                        @hasanyrole('Manager')
                         <li class="nav-item h1">
                             <a class="nav-link" href="{{route('admins.reservations')}}">
                                 <i class="fa-solid fa-users"></i> Reservations
                             </a>
                         </li>
-                       
+                        @endhasanyrole
                     </ul>
                 </div>
                 
