@@ -64,7 +64,7 @@ class   AdminController extends Controller
 
     public function reservationShow()
     {
-        $reservation = Reservation::all();
-        return view('admins.dash_reservations', compact('reservation'));
+        $reservations = Reservation::all();
+        return view('admins.dash_reservations', compact('reservations'));
     }
 }

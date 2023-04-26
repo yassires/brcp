@@ -53,7 +53,7 @@ class ReservationController extends Controller
         $jours = date_diff($dateLocation, $dateRetour);
         $prixTtc = $car->price_rent * $jours->format('%d');
 
-        Reservation::create([
+        $reservation = Reservation::create([
             'user_id' => auth()->user()->id,
             'car_id' => $request->car_id,
             'rent_date_start' => $request->rent_date_start,
@@ -61,8 +61,12 @@ class ReservationController extends Controller
             'price_rent' => $prixTtc,
         ]);
 
+        // dd($reservation->id);
+
         $car->update([
-            'available' => 0
+            // 'available' => 0,
+            'reservation_id' => $reservation->id
+            
         ]);
         return redirect()->route('cars.type',0)->with([
             'success' => 'Reservation added successfully'
@@ -89,9 +93,24 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateReservationRequest $request, Reservation $reservation)
+    public function update(UpdateReservationRequest $request)
     {
         //
+
+        $reservation = Reservation::find($request->id);
+        // dd($reservation);
+        
+        $reservation->status = $request->input('status');
+        
+        $reservation->update();
+        
+        if ($reservation->status == 'Accepted') {
+            $car = Car::find($reservation->car_id);
+            $car->available = 0;
+            $car->update();
+        }
+
+        return redirect()->back()->with('success', 'Reservation Status Updated Successfully');
     }
 
     /**

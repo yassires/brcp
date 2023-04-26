@@ -32,9 +32,10 @@ Route::get('/cars/type/{pg}', [CarController::class, 'index'])->name('cars.type'
 
 Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 
-Route::Resource('/reservation', ReservationController::class);
+Route::Resource('/reservation', ReservationController::class)->except('update');
+Route::put('/reservation/update', [ReservationController::class, 'update']);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
-Route::put('reservation/{reservation}',[ReservationController::class, 'create'])->middleware('permission:update reservations')->name('reservations.update');
+
 // Route::delete('/reservation/{resrvationId}/delete', [ReservationController::class, 'deleteUserResrvation'])->name('reservation.delete');
 
 
@@ -48,7 +49,7 @@ Route::post('/add/products', [ProductsController::class, 'store'])->name('produc
 
 
 Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.profile');
-Route::Resource('user',UserController::class);
+Route::Resource('user', UserController::class);
 Route::put('/user/profile/{id}', [UserController::class, 'update'])->name('update_profile');
 // Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('users.delete');
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admins.dashboars');
@@ -73,5 +74,5 @@ Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins
 Route::get('/admin/users', [AdminController::class, 'userShow'])->name('admins.users')->middleware('permission:view dashboard');
 Route::get('/admin/reservations', [AdminController::class, 'reservationShow'])->name('admins.reservations')->middleware('permission:view dashboard');
 
-Route::get('admin/users/{user}',[UserController::class,'showOne'])->name('show.users');
-Route::put('role/',[UserController::class,'assignRole'])->middleware('permission:view dashboard')->name('assign.role');
+Route::get('admin/users/{user}', [UserController::class, 'showOne'])->name('show.users');
+Route::put('role/', [UserController::class, 'assignRole'])->middleware('permission:view dashboard')->name('assign.role');

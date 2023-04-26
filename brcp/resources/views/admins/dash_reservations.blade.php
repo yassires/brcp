@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($reservation as $reservation)
+                    @foreach ($reservations as $reservation)
                     <tr>
                         {{-- @php
                             dd($reservation->user->name);
@@ -55,10 +55,11 @@
                         <td>{{$reservation->rent_date_end}}</td>
                         <td>{{$reservation->price_rent}}</td>
                         <td>{{$reservation->created_at}}</td>
+                        <td>{{$reservation->status}}</td>
 
                         <td class="d-flex flex-row justify-content-center">
                             <div class="pe-3">
-                                <a  onclick="editReservation({{ $reservation->id }})" class="btn btn-warning mr-2"><i class="fa fa-edit"></i></a>
+                                <a href="#modal-reservation" data-bs-toggle="modal"  onclick="editReservation('{{ $reservation->id }}' , '{{ $reservation->status}}')" class="btn btn-warning mr-2"><i class="fa fa-edit"></i></a>
                             </div>
                             <form action="{{route('reservation.destroy',$reservation->id)}}" method="POST">
                                 @csrf
@@ -82,7 +83,7 @@
 <div class="modal fade" id="modal-reservation" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="{{ route('reservation.update') }}" method="POST" id="form" >
+        <form action="/reservation/update" method="POST" id="form" >
           @csrf
           @method('PUT')
           <div class="modal-header">
@@ -96,9 +97,9 @@
             <div class="mb-3">
                 <label class="form-label" >Status</label>
                 <select name="status"  class="form-select" aria-label="Default select example">
-                    <option value="Accepted">Accepted</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Rejected">Rejected</option>
+                    <option value="Accepted" id="Accepted">Accepted</option>
+                    <option value="Pending" id="Pending" >Pending</option>
+                    <option value="Rejected" id="Rejected">Rejected</option>
                 </select>                  
               </div>
           </div>
@@ -115,27 +116,9 @@
 
 
 <script>
-    function editReservation(id) {
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                let reservation = JSON.parse(xhr.responseText);
-
-                console.log(reservation);
-
-                //Setting the value of the hidden input as id
-                document.querySelector('#modal-reservation #reservation-id').value = reservation.reservation.id;
-                // Condition that selects the option in status update
-                if(reservation.reservation.status == 'Accepted' || reservation.reservation.status == 'Pending' || reservation.reservation.status == 'Rejected'){
-                    document.querySelector('#modal-reservation [name=status] option[value='+reservation.reservation.status+']').selected = true;
-                }
-                else {
-                    document.querySelector('#modal-reservation [name=status] option').selected = true;
-                }
-            }
-        }
-        xhr.open("GET", "reservations/" + id, true);
-        xhr.send();
+    function editReservation(id , status) {
+        document.getElementById(status).setAttribute('selected' , 'n3as');
+        document.getElementById('reservation-id').value = id;
     }
     
 </script>
