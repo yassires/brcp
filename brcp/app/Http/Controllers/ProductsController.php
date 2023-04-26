@@ -17,7 +17,7 @@ class ProductsController extends Controller
     {
         //
         $products = Products::all();
-        $a_brands = Products::whereAvailable(1)->get();
+        // $a_brands = Products::whereAvailable(1)->get();
 
 
         return view('products.index')->with([

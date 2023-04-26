@@ -33,39 +33,36 @@
   
        <div class="container-fluid pb-5">
           
-              <h1>All Cars</h1>
+              <h1>{{$title}}</h1>
   
         
           <div class="p-3 d-flex justify-content-end">
-              <input type="text" class="px-1 border border-none" placeholder="Search Car brand & Model" id="search-box" onkeyup="searchCards()">
+              <input type="text" class="px-1 border border-none" placeholder="Search product name & description" id="search-box" onkeyup="searchCards()">
           </div>
-          <div class="row" id="cars">
-              @foreach($cars as $car)
-              <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <div class="">
+            <div class="row " id="cars">
+              @foreach($products as $product)
+              <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 pb-4">
                   <!-- Card-->
                   <div class="card rounded shadow border-0">
                       <div class="card-body p-4">
-                          <img src="{{asset($car->image)}}" alt="" class="img-fluid d-block mx-auto mb-3 card_photo" />
-                          <h3 class="text-dark text-decoration-none">{{ $car->Brand->name }}</h3>
-                          <h6>Model : {{ $car->name }}</h6>
-                          <h6>Price : {{ $car->price_sell }}</h6>
-                          <h6>Fuel Type : {{ $car->Category->name }}</h6>
+                          <img src="{{asset($product->image)}}" alt="" class="img-fluid d-block mx-auto mb-3 card_photo" />
+                          <h3 class="text-dark text-decoration-none">{{ $product->name }}</h3>
+                          <h6>Model : {{ $product->description }}</h6>
+                          <h6>Price : {{ $product->price }}</h6>
+                          <h6>Fuel Type : {{ $product->quantity }}</h6>
                           <div class="d-flex justify-content-between pt-2">
-                              @if ( $car->sell_rent == 0 )
                                   <ul class="list-inline small">
-                                      <button type="button" class="btn btn-danger "><a class="text-white  text-decoration-none" href="{{route('cars.show',$car->id)}}">Rent Now</a></button>
+                                      <button type="button" class="btn btn-light border-secondary"><a class="text-dark text-decoration-none" href="{{route('cars.show',$product->id)}}">Buy</a></button>
                                   </ul>
-                              @else
-                                  <ul class="list-inline small">
-                                      <button type="button" class="btn btn-light border-secondary"><a class="text-dark text-decoration-none" href="{{route('cars.show',$car->id)}}">Buy</a></button>
-                                  </ul>
-                              @endif
                           </div>
                       </div>
                   </div>
               </div>
               @endforeach
           </div>
+          </div>
+          
           
           <script>
           function searchCards() {
