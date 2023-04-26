@@ -20,7 +20,7 @@ class ProductsController extends Controller
         $a_brands = Products::whereAvailable(1)->get();
 
 
-        return view('cars.index')->with([
+        return view('products.index')->with([
             'products' => $products,
             'title' => "All Products"
         ]);
