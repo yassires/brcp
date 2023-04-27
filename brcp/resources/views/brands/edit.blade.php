@@ -13,7 +13,7 @@
                         Edit  Brand
                     </h3>
                     <div class="card-body">
-                        <form action="{{route('Brands.update',$brand->id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('Brands.update',$brand->id)}}" method="POST" enctype="multipart/form-data" data-parsley-validate>
                             @csrf
                             {{method_field('put')}}
                             <input type="hidden" name="id" value="{{$brand->id}}">
@@ -22,7 +22,7 @@
                                 <input type="text" name="name"
                                 value="{{$brand->name}}"
                                 id="" class="form-control"
-                                placeholder="name">
+                                placeholder="name" required>
                             </div>
                             <div class="form-group">
                                 <img src="/{{$brand->image}}" width="100" height="100" alt="" class="img-fluid rounded">

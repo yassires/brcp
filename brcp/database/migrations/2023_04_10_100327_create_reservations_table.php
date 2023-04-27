@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('car_id');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('car_id')->constrained()->cascadeOnDelete();
             $table->dateTime('rent_date_start');
             $table->dateTime('rent_date_end');
             $table->decimal('price_rent');

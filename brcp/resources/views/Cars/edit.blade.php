@@ -12,7 +12,7 @@
                         Edit  Car
                     </h3>
                     <div class="card-body">
-                        <form action="{{route('cars.update',$car->id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('cars.update',$car->id)}}" method="POST" enctype="multipart/form-data" data-parsley-validate>
                             @csrf
                             {{method_field('put')}}
                             <div class="form-group">
@@ -29,7 +29,7 @@
                                 <input type="text" name="name"
                                 value="{{$car->name}}"
                                 id="" class="form-control"
-                                placeholder="name">
+                                placeholder="name" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Category</label>
@@ -46,21 +46,21 @@
                                 <input type="text" name="color"
                                 value="{{$car->color}}"
                                 id="" class="form-control"
-                                placeholder="white">
+                                placeholder="white" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Price for rent</label>
                                 <input type="number" name="price_rent"
                                 value="{{$car->price_rent}}"
                                 id="" class="form-control"
-                                placeholder="500$">
+                                placeholder="500$" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Price for sell</label>
                                 <input type="number" name="price_sell"
                                 value="{{$car->price_sell}}"
                                 id="" class="form-control"
-                                placeholder="500$">
+                                placeholder="500$" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Availability</label>

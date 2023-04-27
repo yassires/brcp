@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js">
 @section('content')
     <div class="container-fluid">
      <h1>Profile</h1>
@@ -26,13 +26,11 @@
                         <th>Pick-up date</th>
                         <th>Drop-off date</th>
                         <th>Price</th>
+                        <th>status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        // dd(auth()->user()->Reservation)
-                    @endphp
                         @foreach ($cars as $reservation)
                             <tr>
                                 <td>{{$reservation->brand}}</td>
@@ -40,6 +38,7 @@
                                 <td>{{$reservation->pick_up_date}}</td>
                                 <td>{{$reservation->drop_of_date}}</td>
                                 <td>{{$reservation->price}}</td>
+                                <td>{{$reservation->status}}</td>
                                 <td>
                                     <form method="post" action="{{route('reservation.destroy',[$reservation->id])}}" >
                                         @csrf
@@ -48,11 +47,19 @@
                                     </form>
                                 </td> 
                             </tr>
-                            
+                          
                         @endforeach
                     
                 </tbody>
             </table>
+            @foreach ($cars as $reservation)
+                @if ($reservation->status == "Accepted")
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                            Your Reservations has been Accepted , You can go pick-up the Car
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
 
@@ -66,7 +73,7 @@
                             <h3 class="card-title">Profile Information</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{route('update_profile',[$id])}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('update_profile',[$id])}}" enctype="multipart/form-data" data-parsley-validate>
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
@@ -83,11 +90,11 @@
                                 </div>
                                 <div class="form-group py-3">
                                     <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control">
+                                    <input type="password" name="password" id="password" class="form-control" required>
                                 </div>
                                 <div class="form-group py-3">
                                     <label for="password_confirmation">Confirm Password</label>
-                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control ">
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control " required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update Profile</button>
                             </form>
@@ -97,5 +104,9 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 @endsection
 

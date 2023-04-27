@@ -15,7 +15,7 @@
                             {{ $error }}
                         </div>
                     @endforeach
-                        <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data" data-parsley-validate>
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" value="{{$product->id}}">
@@ -24,28 +24,28 @@
                                 <input type="text" name="name"
                                 value="{{$product->name}}"
                                 id="" class="form-control"
-                                placeholder="name">
+                                placeholder="name" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Price</label>
                                 <input type="number" name="price"
                                 value="{{$product->price}}"
                                 id="" class="form-control"
-                                placeholder="500$">
+                                placeholder="500$" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Description</label>
                                 <input type="text" name="description"
                                 value="{{$product->description}}"
                                 id="" class="form-control"
-                                placeholder="something">
+                                placeholder="something" required>
                             </div>
                             <div class="form-group my-3">
                                 <label for="">Quantity</label>
                                 <input type="number" name="quantity"
                                 value="{{$product->quantity}}"
                                 id="" class="form-control"
-                                placeholder="123">
+                                placeholder="123" required>
                             </div>
                             <div class="form-group">
                                 <img src="/{{$product->image}}" width="100" height="100" alt="" class="img-fluid rounded">

@@ -36,7 +36,7 @@ Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 
 Route::Resource('/reservation', ReservationController::class)->except('update');
 Route::put('/reservation/update', [ReservationController::class, 'update']);
-// Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
+Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
 
 
 

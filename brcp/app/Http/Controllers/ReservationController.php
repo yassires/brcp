@@ -64,8 +64,8 @@ class ReservationController extends Controller
         // dd($reservation->id);
 
         $car->update([
-            // 'available' => 0,
-            'reservation_id' => $reservation->id
+            'available' => 0,
+            // 'reservation_id' => $reservation->id
             
         ]);
         return redirect()->route('cars.type',0)->with([

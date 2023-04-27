@@ -39,7 +39,7 @@
                 <div class="col-md-6 mx-auto my-4">
                     @include('includes.messages')
                 </div>
-              <form class="space-y-4 md:space-y-6" action="{{route('users.register')}}" method="POST">
+              <form class="space-y-4 md:space-y-6" action="{{route('users.register')}}" method="POST" data-parsley-validate>
                 @csrf
                   <div>
                       <label for="name" class="block mb-2 text-sm font-medium text-gray-500 ">Name</label>

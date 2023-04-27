@@ -39,6 +39,7 @@
                         <th>Pick-up Date</th>
                         <th>Drop-off Date</th>
                         <th>Price</th> 
+                        <th>Status</th> 
                         <th>Created_at</th>
                     </tr>
                 </thead>
@@ -50,7 +51,7 @@
                         @endphp --}}
                         <td>{{$reservation->id}}</td>
                         <td>{{$reservation->user->name}}</td>
-                        <td>{{$reservation->car->name}}</td>
+                        <td>@if ($reservation->car){{$reservation->car->name}}@else Car Unavailable @endif</td>
                         <td>{{$reservation->rent_date_start}}</td>
                         <td>{{$reservation->rent_date_end}}</td>
                         <td>{{$reservation->price_rent}}</td>
@@ -68,6 +69,7 @@
                             </form>
                         </td>
                     </tr>
+                    
                     @endforeach
                 </tbody>
             </table>

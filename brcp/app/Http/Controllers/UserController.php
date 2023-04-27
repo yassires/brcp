@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Car;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 use stdClass;
 
 class UserController extends Controller
@@ -47,6 +48,7 @@ class UserController extends Controller
         $cars = [];
         foreach ($reservations as $reservation) {
             $car = Car::where('id', $reservation->car_id)->first();
+            // dd($reservation->car_id,$car);
             $obj = new stdClass();
             $obj->id = $reservation->id;
             $obj->pick_up_date = $reservation->rent_date_start;
@@ -54,7 +56,8 @@ class UserController extends Controller
             $obj->price = $reservation->price_rent;
             $obj->brand = $car->Brand->name;
             $obj->category = $car->Category->name;
-
+            $obj->status =$reservation->status;
+            // dd($obj->brand = $car->Brand->name);
             $cars[] = $obj;
         }
         return view('users.show', compact('cars', 'id'));
@@ -148,7 +151,7 @@ class UserController extends Controller
             "password" => "required"
         ]);
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect('/admin');
+            return redirect('/admin/option');
         } else {
             return redirect('login')->with([
                 'error' => 'Email or Password is incorrect'

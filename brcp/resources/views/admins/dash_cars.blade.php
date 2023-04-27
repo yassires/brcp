@@ -102,7 +102,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body ">
-            <form action="{{route('cars.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('cars.store')}}" method="POST" enctype="multipart/form-data" data-parsley-validate>
                 @csrf
                 <div class="form-group">
                     <label for="">Brand</label>
@@ -119,7 +119,7 @@
                     <label for="">name</label>
                     <input type="text" name="name"
                     id="" class="form-control"
-                    placeholder="name">
+                    placeholder="name" required>
                 </div>
                 <div class="form-group pt-2">
                     <label for="">Category</label>
@@ -135,19 +135,19 @@
                     <label for="">Color</label>
                     <input type="text" name="color"
                     id="" class="form-control"
-                    placeholder="white">
+                    placeholder="white" required>
                 </div>
                 <div class="form-group pt-2">
                     <label for="">Price for rent</label>
                     <input type="number" name="price_rent"
                     id="" class="form-control"
-                    placeholder="500$">
+                    placeholder="500$" required>
                 </div>
                 <div class="form-group pt-2">
                     <label for="">Price for sell</label>
                     <input type="number" name="price_sell"
                     id="" class="form-control"
-                    placeholder="500$">
+                    placeholder="500$" required>
                 </div>
                 <div class="form-group pt-2">
                     <label for="">Availability</label>
@@ -169,7 +169,7 @@
                     <label for="">Image</label>
                     <input type="file" name="image"
                     id="" class="form-control"
-                    >
+                    required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

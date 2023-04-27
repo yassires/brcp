@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -57,7 +58,7 @@
                     @endif  
                     @endif
                 </div>
-              <form class="space-y-4 md:space-y-6" action="{{route('users.auth')}}" method="POST">
+              <form class="space-y-4 md:space-y-6" action="{{route('users.auth')}}" method="POST" data-parsley-validate>
                 @csrf
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-500 ">Your email</label>
@@ -83,6 +84,7 @@
 
 </body>
     <!-- BEGIN parsley js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- END parsley js-->
 

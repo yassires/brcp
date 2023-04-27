@@ -89,38 +89,38 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" data-parsley-validate>
                     @csrf
                     <div class="form-group">
                         <label for="">Name</label>
                         <input type="text" name="name"
                         id="" class="form-control"
-                        placeholder="name">
+                        placeholder="name" required>
                     </div>
                     <div class="form-group">
                         <label for="">Price</label>
                         <input type="number" name="price"
                         id="" class="form-control"
-                        placeholder="500$" step="any">
+                        placeholder="500$" step="any" required>
                     </div>
                     <div class="form-group">
                         <label for="">Description</label>
                         <input type="text" name="description"
                         id="" class="form-control"
-                        placeholder="Description.....">
+                        placeholder="Description....." required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Quantity</label>
                         <input type="number" name="quantity"
                         id="" class="form-control"
-                        placeholder="12..">
+                        placeholder="12.." required>
                     </div>
                     <div class="form-group">
                         <label for="">Image</label>
                         <input type="file" name="image"
                         id="" class="form-control"
-                        >
+                        required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
