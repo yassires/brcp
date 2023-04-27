@@ -77,6 +77,7 @@ class ProductsController extends Controller
     public function show(Products $products)
     {
         //
+        return view('order.checkout');
     }
 
     /**

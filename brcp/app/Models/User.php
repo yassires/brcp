@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Cart;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
@@ -66,5 +67,9 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->is_admin ? true : false;
+    }
+
+    public function cart(){
+        return $this->hasMany(Cart::class);
     }
 }

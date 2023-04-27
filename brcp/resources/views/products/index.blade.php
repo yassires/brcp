@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('title')
+    Products
+@endsection
 
 @section('content')
 
@@ -43,7 +46,9 @@
             <div class="row " id="cars">
               @foreach($products as $product)
               <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 pb-4">
-                  <!-- Card-->
+                <form action="{{route('cart.store')}}" method="POST">
+                    @csrf
+                     <!-- Card-->
                   <div class="card rounded shadow border-0">
                       <div class="card-body p-4">
                           <img src="{{asset($product->image)}}" alt="" class="img-fluid d-block mx-auto mb-3 card_photo" />
@@ -53,11 +58,14 @@
                           <h6>Fuel Type : {{ $product->quantity }}</h6>
                           <div class="d-flex justify-content-between pt-2">
                                   <ul class="list-inline small">
-                                      <button type="button" class="btn btn-light border-secondary"><a class="text-dark text-decoration-none" href="{{route('cars.show',$product->id)}}">Buy</a></button>
+                                      <button type="submit" class="btn btn-light border-secondary"><i class="fa-solid fa-cart-shopping"></i></button>
                                   </ul>
+                                  <input name="product_id" type="hidden" value="{{$product->id}}">
                           </div>
                       </div>
                   </div>
+                </form>
+                 
               </div>
               @endforeach
           </div>

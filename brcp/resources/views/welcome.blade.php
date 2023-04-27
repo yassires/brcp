@@ -56,6 +56,7 @@
                     <button  class="nav-link bg-transparent border-0" >Logout</button>
                   </form>
                 </li>
+                
               @else
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('users.register')}}">Register</a>
@@ -119,7 +120,7 @@
             <div class="card rounded shadow border-0">
                 <div class="card-body p-4">
                 <img src="{{asset($car->image)}}" alt="" class="img-fluid d-block mx-auto mb-3 card_photo" />
-                <h3><a href="{{route('reservations.create',$car->id)}}" class="text-dark text-decoration-none">{{ $car->Brand->name }}</a></h3>
+                <h3><a  class="text-dark text-decoration-none">{{ $car->Brand->name }}</a></h3>
                 <h6>Model : {{ $car->name }}</h6>
                 <h6>Price : {{ $car->price_sell }}</h6>
                 <h6>Fuel Type : {{ $car->Category->name }}</h6>

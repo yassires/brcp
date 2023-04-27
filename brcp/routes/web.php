@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
@@ -34,7 +36,10 @@ Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 
 Route::Resource('/reservation', ReservationController::class)->except('update');
 Route::put('/reservation/update', [ReservationController::class, 'update']);
-Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
+// Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
+
+
+
 
 // Route::delete('/reservation/{resrvationId}/delete', [ReservationController::class, 'deleteUserResrvation'])->name('reservation.delete');
 
@@ -43,9 +48,15 @@ Route::Resource('/Brands', BrandController::class);
 Route::put('/Brands', [BrandController::class, 'update'])->name('brands.update');
 Route::post('/add/brands', [BrandController::class, 'store'])->name('brands.store');
 
-Route::Resource('/products', ProductsController::class);
-Route::put('/products/{id}', [ProductsController::class, 'update'])->name('Products.update');
+Route::Resource('/products', ProductsController::class)->except('show');
+Route::get('/products/checkout/{id}',[ProductsController::class,'show'])->name('products.checkout');
+Route::put('/products/{id}', [ProductsController::class, 'update'])->name('products.update');
 Route::post('/add/products', [ProductsController::class, 'store'])->name('products.store');
+
+
+
+Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::get('checkout', [CartController::class, 'index'])->name('checkout');
 
 
 Route::get('/user/{id}/profile', [UserController::class, 'show'])->name('users.profile');
@@ -60,14 +71,30 @@ Route::post('/logout', [UserController::class, 'logout'])->name('users.logout');
 Route::get('/register', [UserController::class, 'registr'])->name('users.register');
 Route::post('/register', [UserController::class, 'register'])->name('users.register');
 
+Route::controller(UserController::class)->group(function(){
+    Route::group(['controller' => CartController::class], function () {
+        // Route::get('cart', 'index')->name('cart');
+        Route::post('cart', 'store')->name('cart.store');
+        Route::delete('cart/{cart}', 'destroy')->name('cart.destroy');
+    });
+});
+
 // Route::group(['middleware' => ['role:Admin']],function(){
 //     Route::get('/admin', [AdminController::class, 'index'])->name('admins.index');
 //     Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.cars');
 //     Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products');
 //     Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands');
 // });
-
-Route::get('/admin', [AdminController::class, 'index'])->name('admins.index')->middleware('permission:view dashboard');
+Route::group(['controller' => OrderController::class], function () {
+    Route::get('orders', 'index')->name('order.index');
+    Route::post('orders', 'store')->name('order.store');
+    Route::get('/{order}', 'edit')->name('order.edit');
+    Route::put('/{order}', 'update')->name('order.update');
+    Route::delete('/{order}', 'destroy')->name('order.destroy');
+    // Route::put('orders/{order}', 'update')->middleware(['permission:edit order']);
+    // Route::delete('orders/{order}', 'destroy')->middleware(['permission:delete order'])->name('order.destroy');
+});
+Route::get('/admin/option', [AdminController::class, 'index'])->name('admins.index')->middleware('permission:view dashboard');
 Route::get('/admin/cars', [AdminController::class, 'carShow'])->name('admins.cars')->middleware('permission:view dashboard');
 Route::get('/admin/products', [AdminController::class, 'productShow'])->name('admins.products')->middleware('permission:view dashboard');
 Route::get('/admin/brands', [AdminController::class, 'brandShow'])->name('admins.brands')->middleware('permission:view dashboard');

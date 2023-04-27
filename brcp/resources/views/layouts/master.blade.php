@@ -29,7 +29,7 @@
                   <a class="nav-link active border-bottom" aria-current="page" href="/cars/type/0">Rent</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active border-bottom" aria-current="page" href="#">Products</a>
+                  <a class="nav-link active border-bottom" aria-current="page" href="/products">Products</a>
                 </li>
                 @auth
                     <li class="nav-item">
@@ -60,6 +60,7 @@
                     <li class="nav-item">
                       <a class="nav-link" href="{{route('users.login')}}">Login</a>
                     </li>
+                    
                @endauth
               </ul>
             </div>
