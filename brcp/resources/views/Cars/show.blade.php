@@ -1,6 +1,8 @@
 @extends('layouts.master')
-
 @section('content')
+
+@if (auth()->user())
+
     
 {{-- <div class="container-fluid">
     <h2>Car Details</h2>
@@ -75,80 +77,101 @@
                   
                       
                             <div class="card-body">
-                                <form action="{{route('reservation.store')}}" method="POST" id="create-reservation">
+                                <form action="{{route('reservation.store')}}" method="POST" id="create-reservation" data-parsley-validate>
                                     @csrf
-                                    <div class="d-flex pb-3">
-                                        
-                                        <span class="pe-5">
+                                    <div class="d-flex flex-wrap pb-3">
+                                      @if ($car->sell_rent == 1)
+                                        <span class="me-5 pb-3">
+                                          <p class="text-muted">Name</p>
+                                        <input class="form-control text-muted" name="name" type="text" placeholder="Name" required/>
+                                        </span>
+                                        <span class="pe-2">
                                             <p class="text-muted">Email</p>
-                                            <input class="form-control" type="email" placeholder="Something@test.com" />
+                                            <input class="form-control text-muted" name="email" type="email" placeholder="Something@test.com" required/>
                                         </span>
-                                        <span class="me-5">
-                                            <p class="text-muted">Name</p>
-                                            <input class="form-control" type="text" placeholder="Name" />
+                                        <span class="pe-5">
+                                            <p class="text-muted">Phone</p>
+                                            <input class="form-control text-muted" name="phone" type="tel" placeholder="0......." required/>
                                         </span>
+                                        <span class="pe-5">
+                                            <p class="text-muted">Address</p>
+                                            <input class="form-control text-muted" name="address" type="text" placeholder="something ....." required/>
+                                        </span>
+                                        <span class="pe-5">
+                                            <p class="text-muted">Message</p>
+                                            <input class="form-control text-muted" name="message" type="text" placeholder="Say something to the Seller" required/>
+                                        </span>
+                                        <input type="hidden" name="car_id" value="{{$car->id}}">
+                                      @endif
+                                    </div>   
                                     @if ($car->sell_rent == 0)
-                                            <div class="form-group">
-                                                <p for="rent_date_start" class="text-muted">Pick-up date</p>
-                                                <input type="date" name="rent_date_start" id=""
-                                                    class="form-control" placeholder="Pick-up date..." required>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="form-group my-2">
-                                            <p for="rent_date_end" class="text-muted">Drop-off date</p>
-                                            <input type="date" name="rent_date_end" id=""
-                                                class="form-control" placeholder="Drop-off date..." required>
-                                            <input type="hidden" name="car_id" value="{{$car->id}}">
-                                        </div>
+                                      <div class="d-flex pb-3">
+                                          <div class="form-group pe-5">
+                                                  <p for="rent_date_start" class="text-muted">Pick-up date</p>
+                                                  <input type="date" name="rent_date_start" id=""
+                                                      class="form-control" placeholder="Pick-up date..." required>
+                                          </div>
+                                              
+                                          
+                                          <div class="form-group ">
+                                              <p for="rent_date_end" class="text-muted">Drop-off date</p>
+                                              <input type="date" name="rent_date_end" id=""
+                                                  class="form-control" placeholder="Drop-off date..." required>
+                                              <input type="hidden" name="car_id" value="{{$car->id}}">
+                                          </div>
+                                      </div>
+                                           
                                     @endif
+                                    {{-- submit button --}}
+                                          <div class="row">
+                                            <div class="col-12">
+                                                      @if ($car->available)
+                                                              @if ($car->sell_rent == 0)
+                                                                              @auth
+                                                                                  <div>
+                                                                                      <button  type="submit" class="btn btn-primary">
+                                                                                          To Book<span class="fas fa-arrow-right ps-2"></span>
+                                                                                      </button>
+                                                                                  </div>
+                                                                              @else
+                                                                                  <div>
+                                                                                      <a href="{{route('users.login')}}" class="btn btn-primary">
+                                                                                          To Book
+                                                                                      </a>
+                                                                                  </div>
+                                                                              @endauth
+                                                                              
+                                                              @else
+                                                                              
+                                                                              @auth
+                                                                                  <div>
+                                                                                      <button type="submit" class="btn btn-primary">
+                                                                                          Contact Seller<span class="fas fa-arrow-right ps-2"></span>
+                                                                                      </button>
+                                                                                  </div>
+                                                                              @else
+                                                                                  <div>
+                                                                                      <a href="{{route('users.login')}}" class="btn btn-primary">
+                                                                                          Contact Seller
+                                                                                      </a>
+                                                                                  </div>
+                                                                              @endauth
+                                                                              
+                                                              @endif           
+                                                      @else
+                                                      <span class="badge bg-warning ">
+                                                        Out of stock
+                                                      </span>
+                                                      @endif
+                                            </div>
+                                          </div>
+                                    {{-- submit button --}}
+
                                 </form>
                             </div>
 
                     
                 </div>
-              </div>
-            </div>
-            <div class="row m-0">
-              <div class="col-12 mb-4 p-0">
-                        @if ($car->available)
-                                @if ($car->sell_rent == 0)
-                                                @auth
-                                                    <div>
-                                                        <button  onclick="document.getElementById('create-reservation').submit();" class="btn btn-primary">
-                                                            To Book<span class="fas fa-arrow-right ps-2"></span>
-                                                        </button>
-                                                    </div>
-                                                @else
-                                                    <div>
-                                                        <a href="{{route('users.login')}}" class="btn btn-primary">
-                                                            To Book
-                                                        </a>
-                                                    </div>
-                                                @endauth
-                                                
-                                @else
-                                                
-                                                @auth
-                                                    <div>
-                                                        <a href="{{route('reservations.create',$car->id)}}" class="btn btn-primary">
-                                                            Buy<span class="fas fa-arrow-right ps-2"></span>
-                                                        </a>
-                                                    </div>
-                                                @else
-                                                    <div>
-                                                        <a href="{{route('users.login')}}" class="btn btn-primary">
-                                                             Buy
-                                                        </a>
-                                                    </div>
-                                                @endauth
-                                                
-                                 @endif           
-                        @else
-                        <span class="badge bg-warning ">
-                           Out of stock
-                        </span>
-                        @endif
               </div>
             </div>
           </div>
@@ -317,4 +340,13 @@
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+@else
+  <div class="flex justify-content-center align-items-center">
+      <h1>Page Not Found</h1>
+   
+  </div>
+    
+@endif
 @endsection
+

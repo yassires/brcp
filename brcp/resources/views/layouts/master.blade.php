@@ -6,17 +6,18 @@
     @yield('styles')
     <title>@yield('title')</title>
     
-    <!-- BEGIN parsley css-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/doc/assets/docs.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css">
-    <!-- END parsley css-->
+    
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">  </head>
     <link rel="stylesheet" href="{{asset('css/welcome_style.css')}}" />
+    <!-- BEGIN parsley css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/doc/assets/docs.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css">
+    <!-- END parsley css-->
 
     <body>
-      <header class="text-center mb-5" style="height: 8vh;">
+      <header class="text-center " style="height: 8vh;">
           <nav class="navbar navbar-expand-lg ">
           <div class="container d-flex">
             <a class="navbar-brand" href="/"><img src="{{asset('css/img/1.png')}}" class="" width="80" alt="" /> </a>

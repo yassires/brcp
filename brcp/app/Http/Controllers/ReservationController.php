@@ -36,17 +36,90 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
+        // return $request;    
+        if($request->has('email')){
+            // return "chra";
+
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+                'message' => 'required',
+            ]);
+            
+            $car = Car::find($request->car_id);
+            $name = $request->name;
+            $email = $request->email;
+            $phone = $request->phone;
+            $address = $request->address;
+            $message = $request->message;
+
+            $b_car = Reservation::create([
+                'user_id' => auth()->user()->id,
+                'car_id' => $request->car_id,
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone,
+                'address' => $address,
+                'message' => $message,
+            ]);
+            $car->update([
+                'available' => 0,
+                // 'reservation_id' => $reservation->id
+                
+            ]);
+            return redirect()->route('cars.type',1)->with([
+                'success' => 'Reservation added successfully'
+            ]);
+        } else {
+            // return "kra";
+            
+            $this->validate($request, [
             // 'user_id' => 'required',
-            'car_id' => 'required',
+            // 'car_id' => 'required',
             'rent_date_start' => 'required|date|after_or_equal:today',
             'rent_date_end' => 'required|date|after:rent_date_start',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
         ],
         [
             'start_time.after_or_equal' => 'The Reservation date must be today or after today.',
             'end_time.after' => 'The Reservation date must be after the pick-up date',
        
         ]);
+        $car = Car::find($request->car_id);
+        $dateLocation = new DateTime($request->rent_date_start);
+        $dateRetour = new DateTime($request->rent_date_end);
+        $jours = date_diff($dateLocation, $dateRetour);
+        $prixTtc = $car->price_rent * $jours->format('%d');
+
+        $reservation = Reservation::create([
+            'user_id' => auth()->user()->id,
+            'car_id' => $request->car_id,
+            'rent_date_start' => $request->rent_date_start,
+            'rent_date_end' => $request->rent_date_end,
+            'price_rent' => $prixTtc,
+        ]);
+
+        // dd($reservation->id);
+
+        $car->update([
+            'available' => 0,
+            // 'reservation_id' => $reservation->id
+            
+        ]);
+        return redirect()->route('cars.type',0)->with([
+            'success' => 'Reservation added successfully'
+        ]);
+        }
+        
+    }
+
+    public function buyCar(Request $request) {
+        
         $car = Car::find($request->car_id);
         $dateLocation = new DateTime($request->rent_date_start);
         $dateRetour = new DateTime($request->rent_date_end);

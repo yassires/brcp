@@ -7,7 +7,7 @@
      <div class="row my-4 container">
         <div class="col-md-4">
             <div class="card text-left">
-                <img class="card-img-top" src="{{asset(Auth::user()->image)}}" style="width: 200px;margin:auto;padding-top:10px;border-radius:10%;" alt="">
+                <img class="card-img-top" src="{{asset(Auth::user()->image)}}" style="width: 100px;margin:auto;padding-top:10px;border-radius:40%;" alt="">
                 <div class="card-body" style="margin:auto">
                     <h4 class="card-title text-black">{{Auth::user()->name}}</h4>
                     <p class="card-text d-flex flex-row align-items-center">
@@ -16,9 +16,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 ">
             <h3>Reservations</h3>
-            <table class="table">
+            <div class="overflow-auto">
+                <table class="table ">
                 <thead>
                     <tr>
                         <th>Brand</th>
@@ -52,6 +53,8 @@
                     
                 </tbody>
             </table>
+            </div>
+            
             @foreach ($cars as $reservation)
                 @if ($reservation->status == "Accepted")
                     <div class="alert alert-success alert-dismissible" role="alert">

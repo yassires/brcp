@@ -122,7 +122,7 @@ class CarController extends Controller
             $file->move(public_path('images'), $name);
             $image = 'images/' . $name;
         }
-        dd($request->image);
+        // dd($request->image);
 
         $car->update([
             'brand' => $request->brand,
