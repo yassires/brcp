@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Car;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
@@ -44,7 +45,16 @@ class UserController extends Controller
     {
         //
         $id = Auth::user()->id;
+        $car = Car::all();
+        $carIds = $car->pluck('id');
         $reservations = Reservation::where('user_id', $id)->get();
+        $message = Message::where('user_id', $id)->get(); 
+        // $cr = $message->where('car_id',$car->id)->get();
+        $cr = $message->whereIn('car_id', $carIds)->values();
+
+
+        
+        // dd($message);
         $cars = [];
         foreach ($reservations as $reservation) {
             $car = Car::where('id', $reservation->car_id)->first();
@@ -60,7 +70,7 @@ class UserController extends Controller
             // dd($obj->brand = $car->Brand->name);
             $cars[] = $obj;
         }
-        return view('users.show', compact('cars', 'id'));
+        return view('users.show', compact('cars', 'id','message','car','cr'));
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Products;
 use App\Models\Reservation;
 use App\Models\User;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 
@@ -65,6 +66,7 @@ class AdminController extends Controller
     public function reservationShow()
     {
         $reservations = Reservation::all();
-        return view('admins.dash_reservations', compact('reservations'));
+        $message = Message::all();
+        return view('admins.dash_reservations', compact('reservations','message'));
     }
 }

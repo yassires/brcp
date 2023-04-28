@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\Car;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use DateTime;
 
@@ -38,6 +39,9 @@ class ReservationController extends Controller
         //
         // return $request;    
         if($request->has('email')){
+            // Buy
+            // Buy
+
             // return "chra";
 
             $this->validate($request, [
@@ -55,7 +59,7 @@ class ReservationController extends Controller
             $address = $request->address;
             $message = $request->message;
 
-            $b_car = Reservation::create([
+            $b_car = Message::create([
                 'user_id' => auth()->user()->id,
                 'car_id' => $request->car_id,
                 'name' => $name,
@@ -64,15 +68,18 @@ class ReservationController extends Controller
                 'address' => $address,
                 'message' => $message,
             ]);
+            
             $car->update([
                 'available' => 0,
-                // 'reservation_id' => $reservation->id
                 
             ]);
             return redirect()->route('cars.type',1)->with([
                 'success' => 'Reservation added successfully'
             ]);
         } else {
+            // Rent 
+            // Rent
+
             // return "kra";
             
             $this->validate($request, [
@@ -104,7 +111,6 @@ class ReservationController extends Controller
             'price_rent' => $prixTtc,
         ]);
 
-        // dd($reservation->id);
 
         $car->update([
             'available' => 0,
@@ -118,33 +124,7 @@ class ReservationController extends Controller
         
     }
 
-    public function buyCar(Request $request) {
-        
-        $car = Car::find($request->car_id);
-        $dateLocation = new DateTime($request->rent_date_start);
-        $dateRetour = new DateTime($request->rent_date_end);
-        $jours = date_diff($dateLocation, $dateRetour);
-        $prixTtc = $car->price_rent * $jours->format('%d');
-
-        $reservation = Reservation::create([
-            'user_id' => auth()->user()->id,
-            'car_id' => $request->car_id,
-            'rent_date_start' => $request->rent_date_start,
-            'rent_date_end' => $request->rent_date_end,
-            'price_rent' => $prixTtc,
-        ]);
-
-        // dd($reservation->id);
-
-        $car->update([
-            'available' => 0,
-            // 'reservation_id' => $reservation->id
-            
-        ]);
-        return redirect()->route('cars.type',0)->with([
-            'success' => 'Reservation added successfully'
-        ]);
-    }
+    
 
     /**
      * Display the specified resource.
@@ -193,7 +173,7 @@ class ReservationController extends Controller
     {
         //
         $reservation->delete();
-        return redirect()->route('users.profile', auth()->user()->id)->with([
+        return redirect()->route('admins.dash_reservations', auth()->user()->id)->with([
             'success' => 'Reservation Deleted successfully'
         ]);
     }

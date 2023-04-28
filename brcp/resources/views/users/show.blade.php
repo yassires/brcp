@@ -55,14 +55,32 @@
             </table>
             </div>
             
-            @foreach ($cars as $reservation)
-                @if ($reservation->status == "Accepted")
+            @foreach ($cars as $reservation )
+                @foreach ($message as $msg)
+                    @foreach ($cr as $cr)
+                        @if ($reservation->status == "Accepted" || ($msg->status == "Accepted"))
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                    Your Reservations @if ($msg->status == "Accepted")
+                                        for Buying {{$cr->car->name}}
+                                    @endif has been Accepted , You can go pick-up the Car
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                    @endforeach
+                @endforeach
+            @endforeach
+            
+            {{-- @foreach ($message as $msg) --}}
+                    {{-- @foreach ($cr as $cr) --}}
+                    {{-- @if ( $msg->status == "Accepted")
                     <div class="alert alert-success alert-dismissible" role="alert">
-                            Your Reservations has been Accepted , You can go pick-up the Car
+                            Your Reservations for Buying {{$msg->car->name}}  has been Accepted , You can go pick-up the Car
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                @endif
-            @endforeach
+                @endif --}}
+            {{-- @endforeach --}}
+        {{-- @endforeach --}}
+            
         </div>
     </div>
 

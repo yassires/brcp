@@ -53,9 +53,9 @@
                       <div class="card-body p-4">
                           <img src="{{asset($product->image)}}" alt="" class="img-fluid d-block mx-auto mb-3 card_photo" />
                           <h3 class="text-dark text-decoration-none">{{ $product->name }}</h3>
-                          <h6>Model : {{ $product->description }}</h6>
-                          <h6>Price : {{ $product->price }}</h6>
-                          <h6>Fuel Type : {{ $product->quantity }}</h6>
+                          <h6>Description : {{ $product->description }}</h6>
+                          <h6>Price : {{ $product->price }} $</h6>
+                          <h6>Quantity : {{ $product->quantity }}</h6>
                           <div class="d-flex justify-content-between pt-2">
                                   <ul class="list-inline small">
                                       <button type="submit" class="btn btn-light border-secondary"><i class="fa-solid fa-cart-shopping"></i></button>

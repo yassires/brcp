@@ -7,6 +7,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
@@ -37,6 +38,9 @@ Route::post('/add/cars', [CarController::class, 'store'])->name('cars.store');
 Route::Resource('/reservation', ReservationController::class)->except('update');
 Route::put('/reservation/update', [ReservationController::class, 'update']);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
+
+Route::Resource('/message', MessageController::class);
+// Route::put('/reservation/car/update',[MessageController::class,'update'])->name('message.upt');
 
 
 

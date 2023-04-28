@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
@@ -71,6 +72,23 @@ class MessageController extends Controller
     public function update(UpdateMessageRequest $request, Message $message)
     {
         //
+        // dd($message->id);
+        
+        $msg = Message::find($message->id);
+        // dd($message);
+
+        $msg->update([
+            'status' => 'Accepted',
+        ]);
+        // dd($msg);
+
+        if ($msg->status == 'Accepted') {
+            $car = Car::find($message->car_id);
+            $car->available = 0;
+            $car->update();
+        }
+
+        return redirect()->back()->with('success', 'Selling Reservation Status Updated Successfully');
     }
 
     /**

@@ -17,7 +17,7 @@
 <div class="my-4  w-100">
 <div class="col-md-12">
     
-    <div class="card shadow">
+    <div class="card shadow ">
         <h1 class="p-4">Reservations</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -76,6 +76,61 @@
             </div>
             
         </div>
+    </div>
+
+    <div class="pt-5">
+        
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        {{-- messages --}}
+        {{-- messages --}}
+            <div class="card shadow">
+                <h1 class="p-4">Messages From Buyers</h1>
+                <div class="card-body d-flex flex-wrap">
+                @foreach ($message as $message)
+                    <div class="overflow-auto pe-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <img src="{{asset($message->user->image)}}" style="width: 40px;height:40px; border-radius:80%">
+                                {{$message->user->name}}
+                            </div>
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Message : <span>{{$message->message}}</span></li>
+                            <li class="list-group-item"><span>{{$message->car->name}}</span> <br><img src="{{asset($message->car->image)}}" style="width:100px; height:80px;"> </li>
+                            
+                            {{-- form --}}
+                            {{-- form --}}
+                            
+                            <form action={{route('message.update',$message->id)}} method="POST"  >
+                                @csrf
+                                @method('put')
+                                {{-- Hidden input --}}
+                                <input id="message-id" hidden name="id" type="text">
+                                <button type="submit" class="btn btn-primary">
+                                    Accept
+                                </button>
+                            </form>
+                            {{-- form --}}
+                            {{-- form --}}
+                            
+                            </ul>
+                            
+                        </div>
+                    </div>
+                @endforeach
+                
+            </div>
+
+            </div>
+        {{-- messages --}}
+        {{-- messages --}}
     </div>
 </div>
 </div>
